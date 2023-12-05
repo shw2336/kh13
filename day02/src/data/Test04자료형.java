@@ -23,5 +23,8 @@ public class Test04자료형 {
 		System.out.println(d / e);  // 3이 나오고 나머지 1은 안나온다
 		System.out.println(d % e); // 나머지를 알려주는 수식
 		
+		
+		
+		
 	}
 }
