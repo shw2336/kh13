@@ -18,7 +18,7 @@ public class Test04변환연산 {
 		
 		// 위 코드의 결론은 int < long (이걸로 크기 비교 가능)
 		int v1 =12;
-		double v2 = v1; //자동 변환
+		double v2 = v1; //자동 변환 // 좋아
 		System.out.println(v2);
 		
 		double v3 = 12.345; // 이게 12뒤에 소수점 없어도 변환안된다 double이기때문에
