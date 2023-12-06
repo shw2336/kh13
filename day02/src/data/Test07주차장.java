@@ -10,7 +10,7 @@ public class Test07주차장 {
 		
 		int pricePeriod = 10;
 		int pricePerTime = 1500;
-		
+		//조하조하
 		
 		int cometotal = comehour*60 + comeminute;
 		int lefttotal = lefthour*60 + leftminute;
