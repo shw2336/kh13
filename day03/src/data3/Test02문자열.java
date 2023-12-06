@@ -20,8 +20,11 @@ public class Test02문자열 {
 		String d = "안\n녕\n하\n세\n요"; //엔터키 => \n
 		System.out.println(d);
 		
-		String e = "가격 : 10000원";
+		String e = "가격 : \\10000원";
 		System.out.println(e);
+		
+		// (특징) 덧셈은 가능하다(연결해주는 느낌)
+		System.out.println("e =" + e);
 		
 	}
 }
