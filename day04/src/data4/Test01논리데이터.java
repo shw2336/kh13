@@ -17,5 +17,10 @@ public class Test01논리데이터 {
 		int pizza = 20000;
 		boolean order = money >= pizza;
 		System.out.println("order = " + order);
+		
+		
+		
+		
+		
 	}
 }
