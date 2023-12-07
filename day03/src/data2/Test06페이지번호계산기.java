@@ -18,9 +18,10 @@ public class Test06페이지번호계산기 {
 		
 		
 		int page = 275; 
-		int pagenumber = (page-1) / 10;
-		int left = pagenumber*10 + 1;
-		int right = pagenumber*10 + 10; 
+		int scope = 10;
+		int pagenumber = (page-1) / scope;
+		int left = pagenumber*scope + 1;
+		int right = pagenumber*scope + scope; 
 		
 		//System.out.println(pagenumber);
 		//System.out.println(left);
