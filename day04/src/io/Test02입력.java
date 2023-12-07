@@ -15,7 +15,7 @@ public class Test02입력 {
 		
 		int a = sc.nextInt(); //키보드에서 숫자 한 개를 전달받아 a에 저장
 		int b = sc.nextInt(); //키보드에서 숫자 한 개를 전달받아 b에 저장
-		
+
 		System.out.println("a = " + a);
 		System.out.println("b = " + b);
 	}
