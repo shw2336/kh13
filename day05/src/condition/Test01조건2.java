@@ -7,7 +7,7 @@ public class Test01조건2 {
 		//- 주어진 값이 짝수라면 "짝수입니다" 출력
 		
 		// 입력
-		int number = 121;
+		int number = 122;
 		
 		//계산
 		boolean odd = number % 2 != 0;
