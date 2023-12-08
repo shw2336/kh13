@@ -10,8 +10,8 @@ public class Test03논리연산 {
 		//- 청소년은 14살부터 19살까지입니다
 		
 		int age = 5;
-		//boolean teen  = 14 <= age <=19;
-		boolean teen = 14 <= age && age <= 19;
+		//boolean teen  = 14 <= age <=19; // 안됨
+		boolean teen = 14 <= age && age <= 19;  // 이렇게 바꿔써줘야 하는것
 		System.out.println("age는 청소년인가요?" + teen);
 		
 		//- 무임승차 대상은 65세 이상 또는 8세 미만입니다
