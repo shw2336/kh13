@@ -50,7 +50,7 @@ public class Test03여행사프로모션 {
 			total = people * day * price; // 원래금액
 		    discount = total * 5 / 100; // 할인금액
 			result = total - discount; // 예상금액
-		}
+		}	
 				System.out.println("총 금액"+ total + "중에서 " + "할인금액은" + discount + "원이고" + "예상 금액은 " + result + "원");
 		}
 	}
