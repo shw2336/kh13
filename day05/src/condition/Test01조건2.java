@@ -1,6 +1,6 @@
 package condition;
 
-public class Test01조건 {
+public class Test01조건2 {
 	public static void main(String[] args) {
 		//홀수 짝수 판정 프로그램
 		//- 주어진 값이 홀수라면 "홀수입니다" 출력
@@ -11,13 +11,13 @@ public class Test01조건 {
 		
 		//계산
 		boolean odd = number % 2 != 0;
-		boolean even = number % 2 == 0;
+
 		// 출력
-		if(odd == true) {
+		if(odd) {
 			System.out.println("홀수입니다");
 		}
 		
-		if(even == true) {
+		else {
 			System.out.println("짝수입니다");
 		}
 	}
