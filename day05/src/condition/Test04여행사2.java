@@ -41,8 +41,5 @@ public class Test04여행사2 {
 			System.out.println("아쉽지만 행사 대상은 아닙니다");
 			System.out.println("예상 금액 = " + total + "원");
 		}
-	
-		
 	}
-
 }

@@ -22,9 +22,9 @@ public class Test02지하철요금5 {
 		int card = 500;
 		int result = price + card;
 		
-		System.out.println("요금 : " + price + "원");
-		System.out.println("카드보증금 : " + price + "원");
-		System.out.println("결제 금액 : " + price + "원");
+		System.out.println("요금 : " + result + "원");
+		System.out.println("카드보증금 : " + result + "원");
+		System.out.println("결제 금액 : " + result + "원");
 		
 	}
 }
