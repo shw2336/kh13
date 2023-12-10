@@ -9,30 +9,36 @@ public class Test05과제1 {
 		System.out.print("초를 입력하세요 :");
 		int time = sc.nextInt();
 		
-		//moment = 10;
-		//second = 60;
-		//minute = time / 60;
-		//hour = time / 60 / 60;
-		//day = time / 60 / 60 / 12;
 		
-		int times;
+		// 초 입력하면 시간에 따라 다른 단위로 출력 방금 전 , ?초 전, ?분 전, ?시간 전, ?일 전
+		// time < 10 = 방금전
+		// time < 60 = ?초 전	
+		// time < (60 * 60) = ?분 전
+		// time < (60 * 60 * 24) = ?시간 전	
+		// else = ?일 전
+		
+		
+		int minute = time / 60;
+		int hour = time / 60 / 60;
+		int day = time / 60 / 60 / 24;
+		
+		
+		String write;
 		if( time < 10 ) {
-			System.out.println("방금 전");
+		write = "방금 전";
 		}
 		else if (time < 60) {
-			System.out.println(time + "초 전");
+		write = time + "초 전";
 		}
 		else if (time < 60 * 60) {
-			times = time / 60;
-		System.out.println(times + "분 전");
+			write = minute + "분 전";
 		}
-		else if (time < 60 * 60 * 12) {
-			times = time / 60 / 60;
-			System.out.println(times + "시간 전");
+		else if (time < 60 * 60 * 24) {
+			write = hour  + "시간 전";
 		}
 		else {
-			times = time / 60 / 60 / 12;
-			System.out.println(times + "일 전");
+			write = day + "일 전";
 		}
+		System.out.print(write + "에 작성된 글입니다");
 	}
 }
