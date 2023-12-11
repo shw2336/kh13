@@ -2,7 +2,7 @@ package condition3;
 
 import java.util.Scanner;
 
-public class Test02학점계산기 {
+public class Test02학점계산기2 {
 	public static void main(String[] args) {
 		//KH대학교에서는 다음 기준에 따라 학점을 계산합니다.
 		//(시험은 '100'점이 만점입니다)
@@ -24,27 +24,22 @@ public class Test02학점계산기 {
 		//int exam score = test / 10;
 		int score = test / 10;
 		
-		//계산
-		String grade;
 		switch(score) {
-		case 9: case 10:  //if(score >=90 && score <= 100)
-			grade = "A+";
+		case 9: case 10: 
+			System.out.println("A+");
 			break;
 		case 8:
-			grade = "A";
+			System.out.println("A");
 			break;
 		case 7:
-			grade = "B";
+			System.out.println("B");
 			break;
 		case 6:
-			grade = "C";
+			System.out.println("C");
 			break;
 		default:
-			grade = "F";
+			System.out.println("F");
 			break;
 			}
-		
-		//출력
-		System.out.println("당신의 학점 : " + grade);
 		}
 	}
