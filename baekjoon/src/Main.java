@@ -8,12 +8,10 @@ public class Main {
 		int b = sc.nextInt();
 		int c = sc.nextInt();
 
+		System.out.println((a+b)%c);
+		System.out.println(((a%c) + (b%c))%c);
+		System.out.println((a*b)%c);
+		//System.out.println((a%c) * (b%c))%c();
 		
-	//	System.out.println((A+B)%C);
-		//System.out.println(((A%C) + (B%C))%C);
-	//	System.out.println(e);
-	//	System.out.println(f);
-		//System.out.println(g);
-		System.out.println("Hello");
 	}
 }
