@@ -29,6 +29,6 @@ public class Test05과제2 {
 		else {
 			date = "28";
 		}
-		System.out.println(year + "년 " + month + "월 " + "마지막 날짜는 " + date + "일 입니다.");
+		System.out.println(year + "년 " + month + "월 " + "마지막 날짜는 " + date + "일 입니다");
 		}
 	}
