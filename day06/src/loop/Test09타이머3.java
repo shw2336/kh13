@@ -2,7 +2,7 @@ package loop;
 
 import java.util.Scanner;
 
-public class Test09타이머2 {
+public class Test09타이머3 {
 	public static void main(String[] args) {
 		//사용자에게 분과 초를 입력받아서 해당하는 시간만큼의 메세지를 출력하는 프로그램을 구현
 		// 분 입력 : 1
@@ -32,9 +32,18 @@ public class Test09타이머2 {
 				
 				System.out.println(  minute1 + "분" + second1 + "초");
 			}
-			else{
-				System.out.println("띠링!");
-			}
+			
+	        try {
+	            // 1초 동안 정지
+	            Thread.sleep(1000); // 1000 밀리초 = 1초
+	        } catch (InterruptedException e) {
+	            // InterruptedException은 예외 처리가 필요합니다.
+	            e.printStackTrace();
+	        }
 		}
+		
+
+			System.out.println(  "띠링");
+
 	}
 }
