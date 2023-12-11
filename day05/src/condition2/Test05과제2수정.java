@@ -2,7 +2,7 @@ package condition2;
 
 import java.util.Scanner;
 
-public class Test05과제2 {
+public class Test05과제2수정 {
 	public static void main(String[] args) {
 		
 		Scanner sc = new Scanner(System.in);
