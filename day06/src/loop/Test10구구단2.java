@@ -9,6 +9,7 @@ public class Test10구구단2 {
 Scanner sc = new Scanner(System.in);
 		int number = sc.nextInt();
 		
+		// for(int i =9; i>0; i--) { }
 		for(int i=9; i>0; i--) {
 			System.out.println(number + "X" + i + "=");
 			int right = sc.nextInt();
