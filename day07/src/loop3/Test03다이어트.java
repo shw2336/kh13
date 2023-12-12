@@ -9,10 +9,11 @@ public class Test03다이어트 {
 		
 		int first = 100;
 		int count = 1;
-		for(int i=1; i<=5; i++) {
+		for(int i=0; i<=3; i++) {
 			
-			count += 10+i;
+			count += i+10;
 		}
+		
 		System.out.println(count);
 		System.out.println(first + count);
 	}
