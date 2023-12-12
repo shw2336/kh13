@@ -33,7 +33,7 @@ public class Test03랜덤구구단 {
 				else {
 					counteasy ++;
 				}
-			}
+			}//
 			else {
 				System.out.println("오답입니다!");
 			}
