@@ -2,7 +2,7 @@ package loop;
 
 import java.util.Scanner;
 
-public class Test10구구단2 {
+public class Test10구구단완성풀이 {
 	public static void main(String[] args) {
 
 		System.out.println("입력하세요");
