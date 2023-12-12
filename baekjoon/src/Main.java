@@ -4,14 +4,12 @@ public class Main {
 	public static void main(String[] args) {
 		
 Scanner sc = new Scanner(System.in);	
+		int T = sc.nextInt();	
 		
-		int n = sc.nextInt();
-		
-		int a = 0;
-
-		for(int i=1; i<=n; i++) {
-			a= a+i; //== a += i			
+		for(int i=1; i<=T; i++) {
+			int A = sc.nextInt();
+			int B = sc.nextInt();
+			System.out.println(A + B);
 		}
-		System.out.println(a);
 	}
 }
