@@ -1,23 +1,17 @@
 import java.util.Scanner;
 
 public class 문제풀이기억하고싶은것 {
-	//기억남는 문제
-	//1부터 n까지의 합 구하는 공식
-	//	ex) n = 8 이면 1+2+3+4+5+6+7+8=?
-	//	ex) n = 9 이면 1+2+3+4+5+6+7+8+9=?
-	//	ex) n = 4 이면 1+2+3+4=?
-	
 	public static void main(String[] args) {
-		
+//		디지털 시계 관련 문제 
 Scanner sc = new Scanner(System.in);	
+		int hour = sc.nextInt();
+		int minute = sc.nextInt();
+		int addtime = sc.nextInt();
 		
-		int n = sc.nextInt();
+		int resulthour = (hour*60 + minute + addtime) / 60 % 24; // 이게 미쳤따 / 60 % 24 하면 디지털 시계 시간 표현 가능!
+		int resultminute = (hour*60 + minute + addtime) % 60;
 		
-		int a = 0;
-
-		for(int i=1; i<=n; i++) {
-			a= a+i; //== a += i			
+		System.out.println(resulthour + " " + resultminute);
+		
 		}
-		System.out.println(a);
 	}
-}
