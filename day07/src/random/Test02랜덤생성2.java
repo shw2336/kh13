@@ -37,6 +37,7 @@ public class Test02랜덤생성2 {
 			break;
 		case 1:
 			System.out.println("바위");
+			break;
 		case 2: //이걸 그냥 defalt로 해도 된다.
 			System.out.println("보");
 		}
