@@ -32,9 +32,6 @@ public class Test03랜덤구구단콤보만들기2 {
 				combo = 0;
 			}
 		}
-
-
 		System.out.println("게임 끝!");
-
 	}
 }
