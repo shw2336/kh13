@@ -2,7 +2,7 @@ package loop3;
 
 import java.util.Scanner;
 
-public class Test05베스킨라빈스31 {
+public class Test05베스킨라빈스31수정 {
 	public static void main(String[] args) {
 //		베스킨라빈스31 게임은 사용자들이 번갈아서 숫자를 1~3개 골라 31을 말하게 되는 사람이 지는 게임입니다.
 //		사용자에게 반복적으로 1~3 사이의 숫자를 입력받아 다음과 같이 게임이 진행될 수 있도록 구현해보세요
@@ -29,17 +29,16 @@ public class Test05베스킨라빈스31 {
 
 		int count = 1;
 		int total = 0;
+		System.out.println("현재 숫자 : " + count);
 		while(true) {
-			System.out.println("현재 숫자 : " + count);
 			System.out.print("숫자를 입력하세요 : ");
 			int a = sc.nextInt();
 			count += a;
-			
-			//if (count < 31) {
-			//System.out.println("현재 숫자 : " + count);	
-			//	}
-			
-			if(count >= 31) {
+			if (count < 31) {
+			System.out.println("현재 숫자 : " + count);	
+			}
+
+			if(count == 31) {
 				System.out.println("현재 숫자 : " + count);
 				System.out.println("당신은 패배했습니다");
 				break;
