@@ -9,7 +9,7 @@ public class Test05배열입력3완성형 {
 		Scanner sc = new Scanner(System.in);
 		
 		//int[] numbers = new int[] { 10, 20, 30, 40, 50};
-		int[] numbers = new int[2]; //데이터가 정해지지 않은 경우(데이터의 개수를 써주는것)
+		int[] numbers = new int[5]; //데이터가 정해지지 않은 경우(데이터의 개수를 써주는것)
 		// numbers -----	[0][0][0][0][0] > 처음 만들면(new int) 깨끗하다! 0으로 출력이 됨
 		// numbers = 10; 이건 안된다 // 마찬가지로 numbers = sc.nextInt(); 이건 안된다
 		// numbers[0] = 10; 이렇게 해야 된다! // 마찬가지로 numbers[0] = sc.nextInt(); 이건 된다!
