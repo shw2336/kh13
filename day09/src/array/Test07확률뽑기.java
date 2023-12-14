@@ -11,18 +11,18 @@ public class Test07확률뽑기 {
 //		철 상자 : 70%
 		Random r = new Random();
 		
-		String[] room = new String[] {"금빛상자", "은빛상자","철 상자"};
+		String[] boxs = new String[] {"금빛상자", "은빛상자","철 상자"};
 		
-			int box = r.nextInt(10);
+			int pick = r.nextInt(10);
 			
-			if(box == 0) {
-				System.out.println(room[0]);
+			if(pick == 0) {
+				System.out.println(boxs[0]);
 			}
-			else if(box == 1 || box == 2) {
-					System.out.println(room[1]);
+			else if(pick == 1 || pick == 2) {
+					System.out.println(boxs[1]);
 			 }
 			else {
-					System.out.println(room[2]);
+					System.out.println(boxs[2]);
 			}
 	}
 }
