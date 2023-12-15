@@ -11,9 +11,9 @@ public class Test06배열섞기 {
 		배열의 모든 자리가 1번은 반드시 바뀌어야함
 		바뀌는 자리가 같은 자리여도 상관없음
 		모든 자리가 교체된 후 배열을 출력*/
-		
-		
 		//
+		
+		////
 		Random r = new Random();
 		int[] numbers = new int[] {30, 50, 20, 10, 40};
 		for(int i=1; i<numbers.length/2; i++) {
