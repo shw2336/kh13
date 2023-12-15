@@ -2,7 +2,7 @@ package array2;
 
 import java.util.Random;
 
-public class Test06배열섞기 {
+public class Test06배열섞기2 {
 	public static void main(String[] args) {
 		
 		/*Test05와 동일한 데이터를 배열에 저장하고 다음 규칙에 따라 데이터를 섞어보세요
@@ -13,7 +13,7 @@ public class Test06배열섞기 {
 		모든 자리가 교체된 후 배열을 출력*/
 		
 		
-		//
+		
 		Random r = new Random();
 		int[] numbers = new int[] {30, 50, 20, 10, 40};
 		for(int i=1; i<numbers.length/2; i++) {
