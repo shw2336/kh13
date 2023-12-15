@@ -11,11 +11,11 @@ public class Test06배열섞기완성 {
 		배열의 모든 자리가 1번은 반드시 바뀌어야함
 		바뀌는 자리가 같은 자리여도 상관없음
 		모든 자리가 교체된 후 배열을 출력*/
-		//
+		////ㅇㅇ
 		
 		Random r = new Random();
 		int[] numbers = new int[] {30, 50, 20, 10, 40};
-		
+		//ㅇㅇ
 		for(int i=0; i<numbers.length; i++) {
 			int random = r.nextInt(numbers.length);
 //			System.out.println(random);
