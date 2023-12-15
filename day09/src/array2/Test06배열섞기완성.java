@@ -2,7 +2,7 @@ package array2;
 
 import java.util.Random;
 
-public class Test06배열섞기 {
+public class Test06배열섞기완성 {
 	public static void main(String[] args) {
 		
 		/*Test05와 동일한 데이터를 배열에 저장하고 다음 규칙에 따라 데이터를 섞어보세요
