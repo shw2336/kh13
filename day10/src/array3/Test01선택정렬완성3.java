@@ -1,15 +1,15 @@
 package array3;
 
-public class Test01선택정렬완성2 {
+public class Test01선택정렬완성3 {
 	public static void main(String[] args) {
 
 		//배열 준비
 		int[] numbers = new int[] {30, 50, 20, 10, 40};
 
 		//선택 정렬(selection sort) - 최소값을 앞에서부터 채우는 방식
-		for(int k=0; k <= 3; k++) {
+		for(int k=0; k < numbers.length-1; k++) {
 			int min = k;
-			for(int i=k+1; i <= 4; i++) {//마지막까지
+			for(int i=k+1; i < numbers.length; i++) {//마지막까지
 				if(numbers[min] > numbers[i]) {
 					min = i;
 				}
