@@ -1,4 +1,4 @@
-package opp.method3;
+package oop.method3;
 
 public class Payment {
 	//통신사, 상품명, 월정액, 데이터(GB), 통화(분), 문자(건)
