@@ -1,4 +1,4 @@
-package opp.method4;
+package oop.method4;
 
 public class Menu {
 	//행사중인 상품은 가격을 20% 할인해서 출력
