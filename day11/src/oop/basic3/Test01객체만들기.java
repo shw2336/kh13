@@ -1,7 +1,8 @@
 package oop.basic3;
 
 public class Test01객체만들기 {
-	public static void main(String[] args) {
+	public static void main(String[] args) { //전화번호, 비밀번호는 String 
+		//더하기 빼기 곱하기 나누기 안할거면 Int가 아니라 String
 		//순위 클럽명 승리 무승부 패배
 		Soccer a = new Soccer();
 		Soccer b = new Soccer();
@@ -32,6 +33,7 @@ public class Test01객체만들기 {
 		d.draw = 4;
 		d.lose = 3;
 		
+		
 		System.out.println("순위 : " + a.rank);
 		System.out.println("클럽명 : " + a.name);
 		System.out.println("승리 : " + a.win);
@@ -59,6 +61,7 @@ public class Test01객체만들기 {
 		System.out.println("무승부 : " + d.draw);
 		System.out.println("패배 : " + d.lose);
 		
+		System.out.println("\\"); 
 	}
 
 }
