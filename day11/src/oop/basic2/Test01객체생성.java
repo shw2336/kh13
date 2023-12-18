@@ -1,9 +1,9 @@
 package oop.basic2;
 
-public class Test01 {
+public class Test01객체생성 {
 	public static void main(String[] args) {
 		
-		Mypet a = new Mypet();
+		Student a = new Student();
 		a.name = "뽀로로";
 		a.grade = 1;
 		a.score = 70;
@@ -13,7 +13,7 @@ public class Test01 {
 		System.out.print("점수 : " + a.score);
 		System.out.println();
 		
-		Mypet b = new Mypet();
+		Student b = new Student();
 		b.name = "크롱";
 		b.grade = 1;
 		b.score = 55;
@@ -23,7 +23,7 @@ public class Test01 {
 		System.out.print("점수 : " +b.score);
 		System.out.println();
 		
-		Mypet c = new Mypet();
+		Student c = new Student();
 		c.name = "포비";
 		c.grade = 2;
 		c.score = 80;
@@ -33,7 +33,7 @@ public class Test01 {
 		System.out.print("점수 : " +c.score);
 		System.out.println();
 		
-		Mypet d = new Mypet();
+		Student d = new Student();
 		d.name = "해리";
 		d.grade = 2;
 		d.score = 75;
