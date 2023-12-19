@@ -7,9 +7,9 @@ public class Test01 {
 		Interest b = new Interest();
 		Interest c = new Interest();
 		
-		a.data("유재석", 2.20, 1, 500000, 2);
-		b.data("강호동", 2.50, 1, 500000, 2);
-		c.data("신동엽", 2.35, 1.50, 600000, 3);
+		a.data("유재석", 2.20d, 1d, 500000, 2);
+		b.data("강호동", 2.50d, 1d, 500000, 2);
+		c.data("신동엽", 2.35d, 1.50d, 600000, 3);
 		
 		a.information();
 		System.out.println();
