@@ -10,7 +10,9 @@ public class Chart {
 		return song;
 	}
 	void setSong(String song) {
-		if(song == "") return;
+		if(song == null || song.equals("")) {
+		    return;
+		}
 		this.song = song;
 	}
 
@@ -18,7 +20,9 @@ public class Chart {
 		return singer;
 	}
 	void setSinger(String singer) {
-		if(singer == "") return;
+		if(singer == null || singer.equals("")) {
+		    return;
+		}
 	
 		this.singer = singer;
 	}
