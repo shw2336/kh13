@@ -2,29 +2,20 @@ package oop.inherit5;
 
 public class Test01 {
 	public static void main(String[] args) {
-		
-		Purifier a = new Purifier();
-		
-		
-		HotPurifier p1 = new HotPurifier();
-		p1.hot();
+		//Purifier p = new Purifier("???", 500000);
+
+		IcePurifier p1 = new IcePurifier("코웨이", 500000);
 		p1.normal();
-		System.out.println();
-		
-		MultiPurifier p2 = new MultiPurifier();
+		p1.cold();
+		p1.ice();
+
+		HotPurifier p2 = new HotPurifier("쿠쿠", 450000);
 		p2.normal();
-		p2.cold();
 		p2.hot();
-		System.out.println();
-		
-		IcePurifier p3 = new IcePurifier();
+
+		MultiPurifier p3 = new MultiPurifier("SK매직", 650000);
 		p3.normal();
 		p3.cold();
-		p3.ice();
-		System.out.println();
-		
-		}
-		
+		p3.hot();
 	}
-
-
+}
