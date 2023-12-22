@@ -1,4 +1,4 @@
-package oop.poly2;
+package oop.poly2_1;
 
 import java.util.Scanner;
 
