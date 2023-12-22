@@ -24,6 +24,15 @@
 
 ```java
 for(int i=0, i < 10; i++) {
-	System.out.prinln("Hello World!");
+	System.out.prinln("Hello Java!");
 	}
 ```
+
+#인용구
+
+다른 사람이 했던 말 또는 글귀를 옮겨 적을 때 사용
+
+> 나는 생각한다 고로 존재한다 - 데카르트
+
+
+
