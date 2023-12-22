@@ -13,6 +13,21 @@ public class Test01 {
 		p1.samsungPay();
 		p1.bixby();
 
+		
+
+
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		p2.show();
 		p2.call();
 		p2.sms();
