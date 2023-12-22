@@ -1,7 +1,6 @@
-package oop.multi2강사님;
+package oop.multi2;
 
 public interface Electronic {
-
 	void on();
 	void off();
 }
