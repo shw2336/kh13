@@ -14,3 +14,4 @@ public interface Singer {
 	//생성자 - 만들 수 없다
 
 }
+//implements Transportation
