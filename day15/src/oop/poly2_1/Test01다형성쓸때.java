@@ -1,41 +1,27 @@
 package oop.poly2_1;
 
-import java.util.Scanner;
-
 public class Test01다형성쓸때 {
 	public static void main(String[] args) {
+		int type = 1;
+		int action = 3;
 
-		Scanner sc = new Scanner(System.in);
-		System.out.println("노트북을 먼저 선택하세요");
-		System.out.println("1.맥북   2.갤럭시북");
-		int choice = sc.nextInt();
-
-		if (choice == 1) {
-			MacBook answer = new MacBook();
-			System.out.println("테스트할 기능을 선택하세요");
-			System.out.println("1.전원  2.동영상재생 3.타이핑");
-			int function = sc.nextInt();
-			if (function == 1) {
-				answer.power();
-			} else if (function == 2) {
-				answer.video();
-			} else {
-				answer.typing();
-			}
-		} else if (choice == 2) {
-			GalaxyBook answer = new GalaxyBook();
-			System.out.println("테스트할 기능을 선택하세요");
-			System.out.println("1.전원  2.동영상재생 3.타이핑");
-			int function = sc.nextInt();
-			if (function == 1) {
-				answer.power();
-			} else if (function == 2) {
-				answer.video();
-			} else {
-				answer.typing();
-			}
+		NoteBook notebook;
+		if(type == 1) {//갤럭시북
+			notebook = new GalaxyBook();//GalaxyBook → NoteBook(업캐스팅)
+		}
+		else {//맥북
+			notebook = new MacBook();//MacBook → NoteBook(업캐스팅)
 		}
 
+		//notebook에 뭐가 들어있든 기능을 실행하도록 구현
+		if(action == 1) {
+			notebook.power();
+		}
+		else if(action == 2) {
+			notebook.video();
+		}
+		else {
+			notebook.typing();
+		}
 	}
-
 }
