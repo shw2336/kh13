@@ -25,5 +25,17 @@ public class Test01다중상속문제 {
 		e.on();
 		e.move();
 		e.off();
+		
+		Exampleairplane f = new Exampleairplane();
+		f.fly();
+		f.move();
+		f.reservation();
+		
+		Exampledrone g = new Exampledrone();
+		g.on();
+		g.fly();
+		g.move();
+		g.off();
+		
 	}
 }
