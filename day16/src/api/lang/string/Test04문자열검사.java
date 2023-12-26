@@ -25,7 +25,7 @@ public class Test04문자열검사 {
 		//특정 위치의 글자를 추출
 		char a = url.charAt(11);
 		
-		System.out.println("+11 위치의 글자" + url.charAt(11));
+		System.out.println("+11 위치의 글자" + url.charAt(3));
 		System.out.println("+11 위치의 글자" + a); //변수를 이용해서 구하는 위치의 글자
 	}
 }
