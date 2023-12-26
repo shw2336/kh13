@@ -6,7 +6,7 @@ public class Test05닉네임검사2 {
 //		String nickname = "케이에이치123";//정상적인 닉네임
 //		String nickname = "케";//글자수 미달
 //		String nickname = "학원운영자";//금지단어 포함
-		String nickname = "hello123";//글자규칙 위반
+		String nickname = "한글123d";//글자규칙 위반
 
 //		계산
 		boolean isLengthOk = nickname.length() >= 2 && nickname.length() <= 10;
