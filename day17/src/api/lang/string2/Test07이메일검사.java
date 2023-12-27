@@ -9,7 +9,7 @@ public class Test07이메일검사 {
 		
 		String write = sc.nextLine();
 		
-		String regex = "^[a-zA-Z0-9]+(@[a-z]{3,20})+\\.(co\\.kr|com|net|org|dev)$";
+		String regex = "^[a-z0-9][_\\-a-z0-9]{4,19}(@[a-z]{3,20})\\.(co\\.kr|com|net|org|dev)$";
 		
 		if(write.matches(regex)) {
 			System.out.println("올바른 이메일 주소입니다");
