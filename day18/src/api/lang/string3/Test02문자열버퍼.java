@@ -1,17 +1,22 @@
 package api.lang.string3;
 
-public class Test01문자열더하기 {
+public class Test02문자열버퍼 {
 	public static void main(String[] args) {
-		//문자열이 불변(immutable)이어서 생기는 단점 살펴보기(ex : 별 생성)
+		//StringBuffer를 이용한 문자열 합산
 		
-		String star = "";
+		//String star = "";
+		StringBuffer buffer = new StringBuffer();
 		long begin = System.currentTimeMillis(); //현재 시간을 밀리초(ms)로 반환
 		for(int i=1; i<=10; i++) {
-			star += "*";
+			//star += "*";
+			buffer.append("*");
 			
 		}
 		long end = System.currentTimeMillis();
 		long gap = end - begin;
+		
+		buffer.toString();
+		System.out.println(buffer);
 		System.out.println("gap = " + gap);
 		
 		
