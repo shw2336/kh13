@@ -12,7 +12,7 @@ public class Test04숫자형식 {
 		double b = 1234.56789;
 		
 		DecimalFormat df = new DecimalFormat("#,##0.00");
-		
+			
 		System.out.println("a = " + df.format(a));
 		System.out.println("b = " + df.format(b));
 		
