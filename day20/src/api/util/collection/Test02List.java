@@ -21,13 +21,17 @@ public class Test02List {
 		a.add("루비");
 		a.add("엘릭서"); //Discord 가 이 언어를 이용해서 만듬
 		
+		//데이터 개수 확인
+		System.out.println("개수 = " + a.size());
 		
+		//데이터 검색
+		System.out.println("자바가 있나요? " + a.contains("자바"));
 		
-		
+		//데이터 삭제
+		a.remove("파이썬");
 		
 		//출력
 		System.out.println(a);
-		
 	}
 
 }
