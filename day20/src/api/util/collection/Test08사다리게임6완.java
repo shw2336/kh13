@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
-public class Test08사다리게임6 {
+public class Test08사다리게임6완 {
 	public static void main(String[] args) {
 
 		//인원수 입력 처리
