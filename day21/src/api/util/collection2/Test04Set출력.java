@@ -21,7 +21,7 @@ public class Test04Set출력 {
 		for(String name : data) {//data의 모든 항목을 매 바퀴마다 name으로 전달
 			System.out.println("name = " + name);
 		}
-
+System.out.println();
 		//[2] Iterator로 옮겨서 출력(Scanner와 비슷)
 		Iterator<String> iter = data.iterator();//데이터를 옮긴 뒤
 		while(iter.hasNext()) {
