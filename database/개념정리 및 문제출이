@@ -1,0 +1,159 @@
+/*
+ * 기본 키(Primary key)
+ * - 테이블에 단 한개만 설정할 수 있는 유일한 불변 값
+ * - 대표항목 역할을 하며 not null + unique 효과를 가짐
+ * - 회원으로 치면 "아이디"와 "닉네임" 중에서 "아이디"가 기본키 역할을 수행할 수 있다
+ * - 모든 항목 중에 가장 검색 속도가 빠름
+ * - 테이블 당 1개를 반드시 만들 것을 권장(없으면 번호라도 생성해서 지정)
+ */
+
+-- 포켓몬스터 테이블
+create table pocketmon(
+pocketmon_no number primary key,
+pocketmon_name varchar2(30) not null,
+pocketmon_type varchar2(9) not null
+);
+
+drop table pocketmon;
+
+insert into pocketmon(pocketmon_no, pocketmon_name, pocketmon_type) 
+values(1, '이상해씨', '풀');
+insert into pocketmon(pocketmon_no, pocketmon_name, pocketmon_type) 
+values(4, '파이리', '불꽃');
+insert into pocketmon(pocketmon_no, pocketmon_name, pocketmon_type) 
+values(7, '꼬부기', '물');
+
+select * from pocketmon;	
+
+create table board(
+board_no number primary key,
+board_title varchar2(300) not null /*check(regexp_like(board_title, '^[가-힣]+$'))*/,
+board_content varchar2(4000) not null,
+board_writer varchar2(20) check(regexp_like(board_writer, '^[a-z A-Z 0-9]{8,20}$')),
+board_readcount number /*default 0 이렇게 적으면 조회수(숫자) 아무것도 안적었을때 0으로 나옴! */ not null check(board_readcount >= 0)
+);
+
+drop table board;
+
+insert into board(board_no, board_title, board_content, board_writer, board_readcount)
+/*default를 위에서 설정해줬으면 값을 0으로 두려면 board_readcount안적어도 됨*/
+values(1, '정보교육원', '과제하는중입니다', 'shw2336139', 47);
+insert into board(board_no, board_title, board_content, board_writer, board_readcount)
+values(2, '단체회식하자', '맛있는치킨', null, 38);
+
+select * from board;
+
+/*
+ 	시퀀스(sequence)
+ 	-데이터베이스 객체 중 하나
+ 	-번호 생성기
+ 	-테이블과 세트로 사용하는 경우가 많으며 "기본키" 생성하는 목적으로 주로 사용
+ */
+drop sequence product_seq;
+create sequence product_seq;
+-- create sequence product_seq nocache; 번호 끊어짐 없이 쭉 이어지는거
+create table product(
+product_no number primary key,
+product_name varchar2(60) not null,
+product_price number not null
+);
+drop table product;
+
+-- 시퀀스를 이용한 데이터 생성(시퀀스이름.nextval)
+insert into product(product_no, product_name, product_price)
+values(product_seq.nextval, '30인치 모니터', 250000);
+insert into product(product_no, product_name, product_price)
+values(product_seq.nextval, 'RTX 3080 Ti', 1460000);
+
+select * from product;
+
+--시퀀스의 자세한 정보 확인
+select * from user_sequences;
+
+/*
+ *	- date 또는 timestamp 형태를 사용
+ *	- date는 초까지, timestamp는 밀리초까지 저장
+ * 	- java.sql.Date 클래스와 date 형태가 호환됨
+ * 	- java.sql.Timestamp 클래스와 timestamp 형태가 호환됨
+ * 	- 연/월/일/시/분/초(+밀리초)가 모두 필요한 경우 사용한다
+ *	- 변환명령은 to_date()
+ *	- 변환형식 : Y(연도), M(월), D(일), HH/HH24(시간), MI(분), S(초)
+ *	- 현재시각을 구하는 키워드가 존재 (sysdate/systimestamp)
+ *	- 날짜는 더하기 빼기가 가능(단위 : 일(day))
+ */
+drop sequence funding_seq;
+create sequence funding_seq;
+drop table funding;
+create table funding(
+funding_no number primary key,
+funding_title varchar2(90) not null,
+funding_dest number not null,
+funding_begin date not null,
+funding_end date not null
+);
+-- 날짜는 문자열로도 설정이 가능하다
+insert into funding(funding_no, funding_title, funding_dest, funding_begin, funding_end)
+values(funding_seq.nextval, '자바 서적', 500000, '2024/01/10', '2024-01-31');
+
+-- 변환 명령을 사용하면 더 정확하게 형식을 지정할 수 있다
+-- to_date(값, 형식)
+insert into funding(funding_no, funding_title, funding_dest, funding_begin, funding_end)
+values(funding_seq.nextval, '데이터베이스 서적', 600000, to_date('2024/01/10', 'YYYY-MM-DD'), to_date('2024-01-31', 'YYYY-MM-DD'));
+
+--시간까지 지정해보자
+insert into funding(funding_no, funding_title, funding_dest, funding_begin, funding_end)
+values(funding_seq.nextval, '웹 개발 서적', 600000, 
+to_date('2024/01/05 10:58:30', 'YYYY-MM-DD HH24:MI:SS'), to_date('2024-01-31 23:59:59', 'YYYY-MM-DD HH24:MI:SS'));
+
+--현재시간으로 시작! 설정
+insert into funding(funding_no, funding_title, funding_dest, funding_begin, funding_end)
+values(funding_seq.nextval, '클라우드 개발 서적', 600000, 
+sysdate/* = 현재시각*/, to_date('2024-01-31 23:59:59', 'YYYY-MM-DD HH24:MI:SS'));
+
+--한달동안 펀딩을 한다면?!
+insert into funding(funding_no, funding_title, funding_dest, funding_begin, funding_end)
+values(funding_seq.nextval, '클라우드 개발 서적', 600000, 
+sysdate, sysdate+30);
+
+select * from funding;
+
+-- book 테이블
+drop sequence book_seq;
+create sequence book_seq;
+
+drop table book;
+create table book(
+book_id number primary key,
+book_title varchar2(300) not null,
+book_author varchar2(90) 
+	check(regexp_like(book_author, '^[^!@#$]+$')),/*^표시가 대괄호 안에 들어가면 '아니면'이라는뜻*/
+book_publication_date char(10) 
+	check(regexp_like(book_publication_date, '^([0-9]{4})-(02-(0[1-9]|1[0-9]|2[0-8])|(0[469]|11)-(0[1-9]|1[0-9]|2[0-9]|30)|(0[13578]|1[02])-(0[1-9]|1[0-9]|2[0-9]|3[01]))$')),
+book_price number(*, 2) /*여기서 *은 자리무관 *,2는 앞에자리 무관 뒤에 소수점 2자리*/default 0 not null check(book_price >= 0),
+book_publisher varchar2(90),
+book_page_count number not null check(book_page_count >= 1),
+book_genre varchar2(15) not null
+);
+
+INSERT INTO BOOK(book_id, book_title, book_author, book_publication_date, book_price, book_publisher, book_page_count, book_genre)
+VALUES(1, 'Harry Potter 1', 'J.K. Rowling', '2001-06-26', 19.99, 'Scholastic', 320, 'Fantasy');
+INSERT INTO BOOK(book_id, book_title, book_author, book_publication_date, book_price, book_publisher, book_page_count, book_genre)
+VALUES(2, 'To Kill a Mockingbird', 'Harper Lee', '1960-07-11', 14.99, 'Grand Central Publishing', 336, 'Classic');
+INSERT INTO BOOK(book_id, book_title, book_author, book_publication_date, book_price, book_publisher, book_page_count, book_genre)
+VALUES(3, 'The Great Gatsby', 'F. Scott Fitzgerald', '1925-04-10', 12.99, 'Scribner', 180, 'Classic');
+INSERT INTO BOOK(book_id, book_title, book_author, book_publication_date, book_price, book_publisher, book_page_count, book_genre)
+VALUES(4, '1984', 'George Orwell', '1949-06-08', 10.99, 'Secker & Warburg', 328, 'Dystopian');
+INSERT INTO BOOK(book_id, book_title, book_author, book_publication_date, book_price, book_publisher, book_page_count, book_genre)
+VALUES(5, 'Pride and Prejudice', 'Jane Austen', '1813-01-28', 9.99, 'Penguin Classics', 432, 'Romance');
+INSERT INTO BOOK(book_id, book_title, book_author, book_publication_date, book_price, book_publisher, book_page_count, book_genre)
+VALUES(6, 'The Hobbit', 'J.R.R. Tolkien', '1937-09-21', 15.99, 'Houghton Mifflin Harcourt', 320, 'Fantasy');
+INSERT INTO BOOK(book_id, book_title, book_author, book_publication_date, book_price, book_publisher, book_page_count, book_genre)
+VALUES(7, 'The Catcher in the Rye', 'J.D. Salinger', '1951-07-16', 11.99, 'Little, Brown and Company', 224, 'Classic');
+INSERT INTO BOOK(book_id, book_title, book_author, book_publication_date, book_price, book_publisher, book_page_count, book_genre)
+VALUES(8, 'Lord of the Rings', 'J.R.R. Tolkien', '1954-07-29', 29.99, 'Allen & Unwin', 1178, 'Fantasy');
+INSERT INTO BOOK(book_id, book_title, book_author, book_publication_date, book_price, book_publisher, book_page_count, book_genre)
+VALUES(9, 'To the Lighthouse', 'Virginia Woolf', '1927-05-05', 13.99, 'Harcourt, Brace and Company', 209, 'Modernist');
+INSERT INTO BOOK(book_id, book_title, book_author, book_publication_date, book_price, book_publisher, book_page_count, book_genre)
+VALUES(10, 'The Alchemist', 'Paulo Coelho', '1988-06-01', 9.99, 'HarperOne', 208, 'Fiction');
+
+select * from book;
