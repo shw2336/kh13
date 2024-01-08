@@ -11,10 +11,10 @@ public class Test01JDBC연결 {
 		
 		//[1] 연결 생성
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
-		dataSource.setUsername("kh13");
-		dataSource.setPassword("kh13");
-		dataSource.setDriverClassName("oracle.jdbc.OracleDriver");
-		dataSource.setUrl("jdbc:oracle:thin:@localhost:1521:xe");
+		dataSource.setUsername("kh13"); //사용자아이디
+		dataSource.setPassword("kh13"); //비밀번호
+		dataSource.setDriverClassName("oracle.jdbc.OracleDriver"); //DB종류 지정
+		dataSource.setUrl("jdbc:oracle:thin:@localhost:1521:xe"); //DB연결유형 + 위치 xe(교육용버전)말고 ORCL도 있다
 		
 		//[2] 명령 생성 - 구문 마지막 세미콜론은 작성하지 않는다
 		String sql = "insert into pocketmon("
