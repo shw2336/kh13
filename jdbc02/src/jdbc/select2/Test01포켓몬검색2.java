@@ -8,11 +8,11 @@ import jdbc.select.PocketmonDto;
 import jdbc.select.PocketmonMapper;
 import jdbc.util.JdbcHelper;
 
-public class Test01포켓몬검색 {
+public class Test01포켓몬검색2 {
 	public static void main(String[] args) {
 		//유사검색
 		//- 시작검색 or 포함검색
-		//- 상황에 맞게 like 연산자 또는 instr 함수를 사용 지금은 like 사용 피카가 앞에 있어야지만 찾을 수 있어
+		//- 상황에 맞게 like 연산자 또는 instr 함수를 사용 지금은 instr을 사용 포함만 되어있으면 찾을 수 있어
 		
 		//데이터 준비
 		String keyword = "피카";
@@ -22,7 +22,7 @@ public class Test01포켓몬검색 {
 		//처리
 		JdbcTemplate jdbcTemplate = JdbcHelper.getJdbcTemplate();
 		String sql = "select * from pocketmon "
-				+ "where pocketmon_name like ? || '%'"; //?는 작은따음표 안해도 알아서 생기기때문에 안써줘도 됨
+				+ "where instr(pocketmon_name, ?) > 0"; //?는 작은따음표 안해도 알아서 생기기때문에 안써줘도 됨
 		Object[] data = {keyword};
 		PocketmonMapper mapper = new PocketmonMapper(); //아까 Mapper 만들어서 그냥 써도 갖고오는거
 		
