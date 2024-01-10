@@ -7,14 +7,15 @@ import jdbc.util.JdbcHelper;
 
 public class EmpDao {
 	
+	//등록 메소드
 	public void insert(EmpDto dto) {
 		JdbcTemplate jdbcTemplate = JdbcHelper.getJdbcTemplate();
 	
 		String sql = "insert into emp(emp_no, emp_name, "
 				+ "emp_dept, emp_date, emp_sal) "
-				+ "values(?, ?, ?, ?, ?)";
+				+ "values(emp_seq.nextval, ?, ?, ?, ?)";
 		
-		Object[] data = {dto.getEmpNo(), dto.getEmpName(), dto.getEmpDept(), 
+		Object[] data = {dto.getEmpName(), dto.getEmpDept(), 
 				dto.getEmpDate(), dto.getEmpSal()};
 		
 		jdbcTemplate.update(sql, data);
@@ -22,4 +23,26 @@ public class EmpDao {
 		
 	}
 
-}
+	//수정 메소드
+	public boolean update(EmpDto dto) {
+		
+		JdbcTemplate jdbcTemplate = JdbcHelper.getJdbcTemplate();
+		
+		String sql = "update emp set emp_name=?, "
+				+ "emp_dept=?, emp_date=?, emp_sal=? where emp_no=?";
+//							여기서 ?는 홀더 라고 부른다
+		Object[] data = {
+				dto.getEmpName(), dto.getEmpDept(), 
+				dto.getEmpDate(), dto.getEmpSal(), dto.getEmpNo()};
+				
+				return jdbcTemplate.update(sql, data) > 0;
+//				int result = jdbcTemplate.update(sql, data);
+//				if(result > 0) return true;
+//				else return false;
+		}
+	
+	//삭제 메소드
+	//목록 메소드
+	//검색 메소드
+	}
+

@@ -1,0 +1,48 @@
+package jdbc.dao;
+
+import org.springframework.jdbc.core.JdbcTemplate;
+
+import jbdc.dto.MenuDto;
+import jdbc.util.JdbcHelper;
+
+public class MenuDao {
+	
+	//등록 메소드
+	public void insert(MenuDto dto) {
+		JdbcTemplate jdbcTemplate = JdbcHelper.getJdbcTemplate();
+		
+		String sql = "insert into menu(menu_no, menu_name_kor, "
+				+ "menu_name_eng, menu_type, menu_price) "
+				+ "values(menu_seq.nextval, ?, ?, ?, ?)";
+		
+		Object[] data = {dto.getMenuNameKor(), 
+				dto.getMenuNameEng(), dto.getMenuType(), dto.getMenuPrice()};
+		
+		jdbcTemplate.update(sql, data);
+		
+	}
+
+	//수정 메소드
+	public boolean update(MenuDto dto) {
+		
+		JdbcTemplate jdbcTemplate = JdbcHelper.getJdbcTemplate();
+		
+		String sql = "update menu set menu_name_kor=?, menu_name_eng=?, "
+				+ "menu_type=?, menu_price=? where menu_no=?";
+		
+		Object[] data = {
+				dto.getMenuNameKor(), dto.getMenuNameEng(), dto.getMenuType(), 
+				dto.getMenuPrice(), dto.getMenuNo()
+		};
+		return jdbcTemplate.update(sql, data) > 0;
+	}
+	
+	
+	
+	
+	
+	
+	//삭제 메소드
+	//목록 메소드
+	//검색 메소드
+}
