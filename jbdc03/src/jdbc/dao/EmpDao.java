@@ -42,6 +42,18 @@ public class EmpDao {
 		}
 	
 	//삭제 메소드
+	public boolean delete(int empNo) {
+		JdbcTemplate jdbcTemplate = JdbcHelper.getJdbcTemplate();
+		String sql = "delete emp where emp_no=?";
+		Object[] data = {empNo};
+		
+		return jdbcTemplate.update(sql, data) > 0;
+		
+	}
+	
+	
+	
+	
 	//목록 메소드
 	//검색 메소드
 	}
