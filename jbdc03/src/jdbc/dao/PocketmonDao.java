@@ -90,6 +90,8 @@ public class PocketmonDao {
 //		}
 	}
 	
+	//항목-키워드 검색
+	
 	
 	//검색 메소드
 	

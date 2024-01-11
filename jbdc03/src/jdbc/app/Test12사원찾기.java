@@ -10,7 +10,7 @@ public class Test12사원찾기 {
 		Scanner sc = new Scanner(System.in);
 		
 		int empNo = sc.nextInt();
-		
+		 
 		EmpDao dao = new EmpDao();
 		EmpDto dto = dao.selectOne(empNo);
 		
