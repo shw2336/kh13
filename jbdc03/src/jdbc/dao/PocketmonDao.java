@@ -101,6 +101,4 @@ public class PocketmonDao {
 	
 
 	
-	//검색 메소드
-	
 }

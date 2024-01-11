@@ -82,10 +82,6 @@ public class EmpDao {
 		
 	}
 	
-	
-	
-	
-	
-	//검색 메소드
+
 	}
 
