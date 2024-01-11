@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import jbdc.dto.MenuDto;
+import jdbc.dto.MenuDto;
 
 public class MenuMapper implements RowMapper<MenuDto> {
 

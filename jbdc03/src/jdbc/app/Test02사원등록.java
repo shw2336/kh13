@@ -1,7 +1,7 @@
 package jdbc.app;
 
-import jbdc.dto.EmpDto;
 import jdbc.dao.EmpDao;
+import jdbc.dto.EmpDto;
 
 public class Test02사원등록 {
 	public static void main(String[] args) {

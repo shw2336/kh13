@@ -2,8 +2,8 @@ package jdbc.app;
 
 import java.util.Scanner;
 
-import jbdc.dto.MenuDto;
 import jdbc.dao.MenuDao;
+import jdbc.dto.MenuDto;
 
 public class Test06메뉴정보변경 {
 	public static void main(String[] args) {

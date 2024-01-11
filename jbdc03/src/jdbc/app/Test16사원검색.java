@@ -3,8 +3,8 @@ package jdbc.app;
 import java.util.List;
 import java.util.Scanner;
 
-import jbdc.dto.EmpDto;
 import jdbc.dao.EmpDao;
+import jdbc.dto.EmpDto;
 
 public class Test16사원검색 {
 	public static void main(String[] args) {

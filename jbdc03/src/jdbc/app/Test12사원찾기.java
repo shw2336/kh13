@@ -2,8 +2,8 @@ package jdbc.app;
 
 import java.util.Scanner;
 
-import jbdc.dto.EmpDto;
 import jdbc.dao.EmpDao;
+import jdbc.dto.EmpDto;
 
 public class Test12사원찾기 {
 	public static void main(String[] args) {

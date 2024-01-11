@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import jbdc.dto.PocketmonDto;
+import jdbc.dto.PocketmonDto;
 import jdbc.mapper.PocketmonMapper;
 import jdbc.util.JdbcHelper;
 

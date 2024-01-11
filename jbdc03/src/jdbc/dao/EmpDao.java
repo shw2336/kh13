@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import jbdc.dto.EmpDto;
+import jdbc.dto.EmpDto;
 import jdbc.mapper.EmpMapper;
 import jdbc.util.JdbcHelper;
 

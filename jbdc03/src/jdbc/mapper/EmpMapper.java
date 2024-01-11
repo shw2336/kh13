@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import jbdc.dto.EmpDto;
+import jdbc.dto.EmpDto;
 
 public class EmpMapper implements RowMapper<EmpDto> {
 

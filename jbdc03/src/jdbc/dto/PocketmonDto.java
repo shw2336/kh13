@@ -1,4 +1,4 @@
-package jbdc.dto;
+package jdbc.dto;
 
 // DTO
 //- Data Transfer Object의 줄임말

@@ -1,4 +1,4 @@
-package jbdc.dto;
+package jdbc.dto;
 
 public class MenuDto {
 	

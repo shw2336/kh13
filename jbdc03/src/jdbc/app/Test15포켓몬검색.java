@@ -2,8 +2,8 @@ package jdbc.app;
 
 import java.util.List;
 
-import jbdc.dto.PocketmonDto;
 import jdbc.dao.PocketmonDao;
+import jdbc.dto.PocketmonDto;
 
 public class Test15포켓몬검색 {
 	public static void main(String[] args) {

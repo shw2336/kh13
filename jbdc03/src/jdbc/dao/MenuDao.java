@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import jbdc.dto.MenuDto;
+import jdbc.dto.MenuDto;
 import jdbc.mapper.MenuMapper;
 import jdbc.util.JdbcHelper;
 

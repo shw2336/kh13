@@ -1,7 +1,7 @@
 package jdbc.app;
 
-import jbdc.dto.PocketmonDto;
 import jdbc.dao.PocketmonDao;
+import jdbc.dto.PocketmonDto;
 
 public class Test01포켓몬등록 {
 	public static void main(String[] args) {

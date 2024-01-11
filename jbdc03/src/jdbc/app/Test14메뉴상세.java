@@ -3,8 +3,8 @@ package jdbc.app;
 import java.text.DecimalFormat;
 import java.util.Scanner;
 
-import jbdc.dto.MenuDto;
 import jdbc.dao.MenuDao;
+import jdbc.dto.MenuDto;
 
 public class Test14메뉴상세 {
 	public static void main(String[] args) {

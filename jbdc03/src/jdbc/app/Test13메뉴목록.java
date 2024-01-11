@@ -2,8 +2,8 @@ package jdbc.app;
 
 import java.util.List;
 
-import jbdc.dto.MenuDto;
 import jdbc.dao.MenuDao;
+import jdbc.dto.MenuDto;
 
 public class Test13메뉴목록 {
 	public static void main(String[] args) {

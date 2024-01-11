@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import jbdc.dto.PocketmonDto;
+import jdbc.dto.PocketmonDto;
 
 // Mapper 파일
 //- 데이터베이스의 조회결과(ResultSet)를 변환객체(PocketmonDto)로 바꿔주는 역할
