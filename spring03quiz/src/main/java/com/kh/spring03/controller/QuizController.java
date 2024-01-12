@@ -1,4 +1,4 @@
-package spring03quiz.controller;
+package com.kh.spring03.controller;
 
 import java.util.ArrayList;
 import java.util.Random;
