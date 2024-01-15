@@ -19,8 +19,8 @@ public class MenuDao {
 	public void insert(MenuDto dto) {
 		String sql = "insert into menu(menu_no, menu_name_kor, "
 				+ "menu_name_eng, menu_type, menu_price) "
-				+ "values(?, ?, ?, ?, ?)";
-		Object[] data = {dto.getMenuNo(), dto.getMenuNameKor(), 
+				+ "values(menu_seq.nextval, ?, ?, ?, ?)";
+		Object[] data = {dto.getMenuNameKor(), 
 				dto.getMenuNameEng(), dto.getMenuType(), dto.getMenuPrice()
 		};
 		jdbcTemplate.update(sql, data);
