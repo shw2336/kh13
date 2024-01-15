@@ -6,6 +6,7 @@ import java.util.Random;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+//스프링의 1원칙 : 무조건 등록부터 해라(IoC, 제어반전)
 @RestController
 public class QuizController {
 	Random r = new Random();
@@ -15,7 +16,7 @@ public class QuizController {
 
 		int dice = r.nextInt(6) + 1;
 
-		return dice;
+		return dice;	
 	}
 
 	@RequestMapping("/lotto")
