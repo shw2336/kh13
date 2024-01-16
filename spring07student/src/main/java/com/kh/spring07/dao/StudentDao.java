@@ -24,7 +24,7 @@ public class StudentDao {
 	public void insert(StudentDto dto) {
 		String sql = "insert into student("
 				+ "student_id, "
-				+ "name, korean_score, math_score, english_score "
+				+ "name, korean_score, math_score, english_score) "
 				+ "values(student_seq.nextval, ?, ?, ?, ?)";
 		Object[] data = {dto.getName(), dto.getKoreanScore(), 
 				dto.getMathScore(), dto.getEnglishScore()};
