@@ -53,6 +53,7 @@ public String list(
 		@RequestParam(required = false) String keyword
 		) {
 	boolean isSearch = column != null && keyword != null;
+	//55줄이랑 같은거 boolean isSearch = !column.equals("") && !keyword.equals("");
 		List<EmpDto> list;
 		if(isSearch) {
 			list = dao.selectList(column, keyword);
@@ -60,6 +61,8 @@ public String list(
 		else {
 			list = dao.selectList();
 		}
+		//57~63줄이랑 같은거 List<EmpDto> list = isSearch ? dao.selectList(column, keyword) : dao.selectList();
+		//여기서 ?는 판정이고 dao.selectList(column, keyword)는 T(true)일때, dao.selectList()는 F(false)일때 3항연산자라고한다
 		
 		StringBuffer buffer = new StringBuffer();
 		for(EmpDto dto : list) {
@@ -69,12 +72,29 @@ public String list(
 			buffer.append(dto.getEmpDept());
 			buffer.append(dto.getEmpDate());
 			buffer.append(dto.getEmpSal());
+			//buffer.append(dto.toString());
 			buffer.append("<br>");
 		}
 		return buffer.toString();
 }
 
-
+@RequestMapping("/detail")
+public String detail(@RequestParam int empNo) {
+	EmpDto dto = dao.selectOne(empNo);
+	if(dto != null) {
+		StringBuffer buffer = new StringBuffer();
+		buffer.append(dto.getEmpName());
+		buffer.append("(");
+		buffer.append(dto.getEmpDept());
+		buffer.append(")");
+		buffer.append(dto.getEmpDate());
+		buffer.append(dto.getEmpSal());
+		return buffer.toString();
+	}
+	else {
+		return "존재하지 않는 사원입니다";
+	}
+}
 
 
 

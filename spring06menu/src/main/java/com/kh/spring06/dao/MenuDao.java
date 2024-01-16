@@ -28,6 +28,7 @@ public class MenuDao {
 		jdbcTemplate.update(sql, data);
 		
 	}
+	
 	public boolean update(MenuDto dto) {
 		String sql = "update menu set menu_name_kor=?, menu_name_eng=?, "
 				+ "menu_type=?, menu_price=? where menu_no=?";
@@ -42,7 +43,6 @@ public class MenuDao {
 		return jdbcTemplate.update(sql, data) > 0;
 	}
 	
-	
 	public List<MenuDto> selectList() {
 		String sql = "select * from menu order by menu_no asc";
 		return jdbcTemplate.query(sql, mapper);
@@ -54,6 +54,24 @@ public class MenuDao {
 		Object[] data = {keyword};
 		return jdbcTemplate.query(sql, mapper, data);
 	}
+	
+	public MenuDto selectOne(int menuNo) {
+		String sql = "select * from menu where menu_no = ?";
+		Object[] data = {menuNo};
+		List<MenuDto> list = jdbcTemplate.query(sql, mapper, data);
+		return list.isEmpty() ? null : list.get(0);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 }

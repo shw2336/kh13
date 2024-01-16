@@ -57,5 +57,21 @@ public class PocketmonDao {
 		
 	}
 	
-
+	//검색(상세)
+	public PocketmonDto selectOne(int pocketmonNo) {
+		String sql = "select * from pocketmon where pocketmon_no = ?";
+		Object[] data = {pocketmonNo};
+		List<PocketmonDto> list = jdbcTemplate.query(sql, mapper, data);
+		return list.isEmpty() ? null : list.get(0);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
