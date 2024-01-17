@@ -40,5 +40,11 @@ public class StudentDto {
 	public void setEnglishScore(int englishScore) {
 		this.englishScore = englishScore;
 	}
+	public int getTotal() {
+		return koreanScore+mathScore+englishScore;
+	}
+	public float getAverage() {
+		return getTotal() / 3f;
+	}
 	
 }
