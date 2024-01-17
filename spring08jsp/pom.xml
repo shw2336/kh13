@@ -3,6 +3,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
+<!--		groupId => 회사명, artifactId => 프로그램명-->
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>3.2.1</version>
@@ -17,6 +18,8 @@
 	<properties>
 		<java.version>17</java.version>
 	</properties>
+	
+<!--	의존성 정보들-->
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
