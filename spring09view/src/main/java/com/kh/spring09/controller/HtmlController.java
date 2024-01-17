@@ -26,6 +26,10 @@ public class HtmlController {
 		return "/WEB-INF/views/dummy.jsp";
 	}
 	
+	@RequestMapping("/link")
+	public String link() {
+		return "/WEB-INF/views/link.jsp";
+	}
 	
 	
 	
