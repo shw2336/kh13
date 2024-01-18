@@ -30,7 +30,7 @@ public class PocketmonController {
 	
 	@RequestMapping("/insert3")
 	public String insert3() {
-		return "/WEB-INF/views/pocketmon/insert2.jsp";
+		return "/WEB-INF/views/pocketmon/insert3.jsp";
 	}
 	
 	
