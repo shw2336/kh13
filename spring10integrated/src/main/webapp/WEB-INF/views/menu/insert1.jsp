@@ -17,7 +17,7 @@
              <select>
        --%>
         메뉴타입 <select name="menuType" required>
-            <option value="">선택하세요</option>
+            <option value="">선택하세요</option>	
             <option value="커피">커피</option>
             <option value="스무디">스무디</option>
             <option value="에이드">에이드</option>
