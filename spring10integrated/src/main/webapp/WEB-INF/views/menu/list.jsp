@@ -16,6 +16,8 @@
 	<button>검색</button>
 </form>
 
+<h2><a href="insert">신규 메뉴 등록</a></h2>
+
 <%-- 목록 출력 --%>
 <table border="1">
 	<thead>
@@ -31,8 +33,10 @@
 		<tr>
 			<td>${dto.menuNo}</td>
 			<td>
-				${dto.menuNameKor}
-				(${dto.menuNameEng})
+				<a href="detail?menuNo=${dto.menuNo}">
+					${dto.menuNameKor}
+					(${dto.menuNameEng})
+				</a>
 			</td>
 			<td>${dto.menuType}</td>
 <%-- 			<td align="right">${dto.menuPrice}</td> --%>

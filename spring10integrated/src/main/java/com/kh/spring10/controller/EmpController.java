@@ -27,7 +27,7 @@ public class EmpController {
 	public String insert() {
 		return "/WEB-INF/views/emp/insert1.jsp";
 	}
-	
+			
 	//@RequestMapping("/insert2")
 	@PostMapping("/insert")//POST방식 - Form을 이용한 데이터 전송 접근
 	public String insert(@ModelAttribute EmpDto dto) {
@@ -98,8 +98,19 @@ public class EmpController {
 		return "/WEB-INF/views/emp/list2.jsp";
 	}
 	
+	@RequestMapping("/detail")
+	public String detail(@RequestParam int empNo, Model model) {
+		EmpDto dto = dao.selectOne(empNo);
+		model.addAttribute("dto", dto);
+		return "/WEB-INF/views/emp/detail.jsp";
+	}
 	
-	
+	//@RequestMapping("/delete")
+	@GetMapping("/delete")
+	public String delete(@RequestParam int empNo) {
+		dao.delete(empNo);
+		return "redirect:list";
+	}
 	
 	
 	

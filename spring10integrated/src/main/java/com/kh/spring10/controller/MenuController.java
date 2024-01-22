@@ -22,14 +22,15 @@ public class MenuController {
 	private MenuDao dao;
 	
 	@GetMapping("/insert")
-	public String insert1() {
-		return "/WEB-INF/views/menu/insert1.jsp";
+	public String insert() {
+		return "/WEB-INF/views/menu/insert.jsp";
 	}
 	
 	@PostMapping("/insert")
-	public String insert2(@ModelAttribute MenuDto dto) {
+	public String insert(@ModelAttribute MenuDto dto) {
 		dao.insert(dto);
-		return "redirect:insertComplete";
+		//return "redirect:/menu/insertComplete";//절대
+		return "redirect:insertComplete";//상대
 	}
 	
 	@RequestMapping("/insertComplete")
@@ -53,7 +54,8 @@ public class MenuController {
 	@PostMapping("/change")
 	public String change(@ModelAttribute MenuDto dto) {
 		dao.update(dto);
-		return "redirect:changeSuccess";
+		//return "redirect:changeSuccess";//수정 성공 페이지
+		return "redirect:detail?menuNo="+dto.getMenuNo();//상세 페이지
 	}
 	
 	@RequestMapping("/changeSuccess")
@@ -80,14 +82,24 @@ public class MenuController {
 		else {
 			list = dao.selectList();
 		}
-
+		
 		model.addAttribute("list", list);
 		return "/WEB-INF/views/menu/list.jsp";
 	}
 	
+	@RequestMapping("/detail")
+	public String detail(@RequestParam int menuNo, Model model) {
+		MenuDto dto = dao.selectOne(menuNo);
+		model.addAttribute("dto", dto);
+		return "/WEB-INF/views/menu/detail.jsp";
+	}
 	
 	
-	
-	
+//	@RequestMapping("/delete")
+	@GetMapping("/delete")
+	public String delete(@RequestParam int menuNo) {
+		dao.delete(menuNo);
+		return "redirect:list";
+	}
 	
 }
