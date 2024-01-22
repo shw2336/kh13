@@ -76,19 +76,26 @@ public class EmpController {
 		return "/WEB-INF/views/emp/editFail.jsp";
 	}
 	
+//	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	@RequestMapping("/list")
 	public String list(
-			@RequestParam(required = false) String column, 
-			@RequestParam(required = false) String keyword, 
-			Model model) {
+				@RequestParam(required = false) String column,
+				@RequestParam(required = false) String keyword,
+				Model model
+			) {
 		boolean isSearch = column != null && keyword != null;
-		List<EmpDto> list = isSearch ? 
-				dao.selectList(column, keyword) : dao.selectList();
-		
+		//List<EmpDto> list = isSearch ? dao.selectList(column, keyword) : dao.selectList();
+		List<EmpDto> list;
+		if(isSearch) {
+			list = dao.selectList(column, keyword);
+		}
+		else {
+			list = dao.selectList();
+		}
+
+		model.addAttribute("isSearch", isSearch);
 		model.addAttribute("list", list);
-		
-		return "/WEB-INF/views/emp/list.jsp";
-		
+		return "/WEB-INF/views/emp/list2.jsp";
 	}
 	
 	
