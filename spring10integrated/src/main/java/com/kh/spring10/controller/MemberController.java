@@ -107,7 +107,40 @@ public class MemberController {
 		return "/WEB-INF/views/member/mypage.jsp";
 	}
 	
+	//비밀번호 변경
+	@GetMapping("/password")
+	public String password() {
+		return "/WEB-INF/views/member/password.jsp";
+	}
 
+	@PostMapping("/password")
+	public String password(@ModelAttribute MemberDto inputDto, 
+			HttpSession session, Model model) {
+		//1. 세션에 저장된 아이디를 꺼낸다
+		String loginId = (String) session.getAttribute("loginId");
+		
+		//2. 아이디에 맞는 정보를 조회한다
+		MemberDto memberDto = memberDao.selectOne(loginId);
+
+		MemberDto findDto = memberDao.selectOne(inputDto.getMemberId());
+//		inputDto.getMemberPw()
+		
+		
+		boolean isValid = findDto != null && inputDto.getMemberPw().equals(findDto.getMemberPw());
+		//결과에 따라 다른 처리
+		if(isValid) {
+			//세션에 데이터 추가
+//			session.setAttribute("loginId", Dto.getMemberId());
+			
+			//최종 로그인시각 갱신
+			memberDao.updateMemberLogin(findDto.getMemberId());
+			
+			return "redirect:/";
+		}
+		else {//로그인 실패
+			return "redirect:password?error";
+		}
+	}
 	
 	
 	
