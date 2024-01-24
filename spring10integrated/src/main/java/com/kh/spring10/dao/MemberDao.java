@@ -68,10 +68,22 @@ public class MemberDao {
 		Object[] data = {dto.getMemberPw(), dto.getMemberId()};
 		return jdbcTemplate.update(sql, data) > 0;
 	}
-
+	//회원탈퇴(삭제, Delete)
 	public boolean delete(String memberId) {
 		String sql = "delete member where member_id = ?";
 		Object[] data = {memberId};
 		return jdbcTemplate.update(sql, data) > 0;
 	}
+	
+	//최종로그인 시각 변경(수정, Update)
+	public boolean updateMemberLogin(String memberId) {
+		String sql = "update member "
+						+ "set member_login=sysdate "
+						+ "where member_id = ?";
+		Object[] data = {memberId};
+		return jdbcTemplate.update(sql, data) > 0;
+	}
+	
+	
+	
 }
