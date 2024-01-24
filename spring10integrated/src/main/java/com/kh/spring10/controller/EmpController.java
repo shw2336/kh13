@@ -23,7 +23,7 @@ public class EmpController {
 	
 	//등록
 	//@RequestMapping("/insert1")
-	@GetMapping("/insert")//GET방식 - 일반적인 주소를 이용한 접근
+	@GetMapping("/insert")//GET방식 - 일반적인 주소를 이용한 접근ㅇㅇ
 	public String insert() {
 		return "/WEB-INF/views/emp/insert1.jsp";
 	}

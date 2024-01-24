@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
         
     <%-- 
     	HTML은 여러 버전이 있었으며, 지금은 HTML 5가 표준
@@ -37,14 +37,32 @@
 	<a href="/emp/list">사원관리 시스템</a>
 	<a href="/menu/list">메뉴 관리 시스템</a>
 	</div>
+	<%-- 로그인 여부에 따라 달라지는 메뉴 --%>
 	<div>
-		<a href="/member/join">회원가입</a>
-		<a href="member/login">로그인</a>
-<!-- 		<a href="">로그아웃</a> -->
-<!-- 		<a href="">내정보</a> -->
+		<c:choose>
+			<c:when test="${sessionScope.loginId != null}">
+				<a href="/member/logout">로그아웃</a>
+				<a href="">내정보</a>
+			</c:when>
+			<c:otherwise>
+				<a href="/member/join">회원가입</a>
+				<a href="/member/login">로그인</a>
+			</c:otherwise>
+		</c:choose>
 	</div>
 	
+	<div>
+		login = ${sessionScope.loginId != null} ,
+		loginId = ${sessionScope.loginId}
+	</div>
 	
+<%-- 
+	<div>
+		<a href="/member/testLogin">테스트로그인</a>
+		<a href="/member/testLogout">테스트로그아웃</a>
+	</div>
+--%>
+
 	
 	<%--	
 		중단 영역
