@@ -36,6 +36,7 @@
 	<a href="/pocketmon/list">포켓몬스터 시스템</a>
 	<a href="/emp/list">사원관리 시스템</a>
 	<a href="/menu/list">메뉴 관리 시스템</a>
+	<a href="/student/list">학생 관리 시스템</a>
 	</div>
 	<%-- 로그인 여부에 따라 달라지는 메뉴 --%>
 	<div>
