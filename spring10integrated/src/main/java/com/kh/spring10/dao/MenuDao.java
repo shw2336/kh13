@@ -8,10 +8,12 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.spring10.dto.MenuDto;
 import com.kh.spring10.mapper.MenuMapper;
+import com.kh.spring10.mapper.StatMapper;
+import com.kh.spring10.vo.StatVO;
 
 @Repository
 public class MenuDao {
-
+	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
@@ -19,42 +21,47 @@ public class MenuDao {
 	private MenuMapper mapper;
 	
 	public void insert(MenuDto dto) {
-		String sql = "insert into menu(menu_no, menu_name_kor, "
-				+ "menu_name_eng, menu_type, menu_price) "
-				+ "values(menu_seq.nextval, ?, ?, ?, ?)";
-		Object[] data = {dto.getMenuNameKor(), 
-				dto.getMenuNameEng(), dto.getMenuType(), dto.getMenuPrice()
+		String sql = "insert into menu("
+							+ "menu_no, menu_name_kor, menu_name_eng, "
+							+ "menu_type, menu_price"
+						+ ") "
+						+ "values(menu_seq.nextval, ?, ?, ?, ?)";
+		Object[] data = {
+			dto.getMenuNameKor(), dto.getMenuNameEng(),
+			dto.getMenuType(), dto.getMenuPrice()
 		};
 		jdbcTemplate.update(sql, data);
-		
 	}
-	
 	public boolean update(MenuDto dto) {
-		String sql = "update menu set menu_name_kor=?, menu_name_eng=?, "
-				+ "menu_type=?, menu_price=? where menu_no=?";
-		Object[] data = {dto.getMenuNameKor(), dto.getMenuNameEng(), dto.getMenuType(), 
-				dto.getMenuPrice(), dto.getMenuNo()};
+		String sql = "update menu "
+						+ "set "
+							+ "menu_name_kor=?, menu_name_eng=?, "
+							+ "menu_type=?, menu_price=? "
+						+ "where menu_no=?";
+		Object[] data = {
+			dto.getMenuNameKor(), dto.getMenuNameEng(),
+			dto.getMenuType(), dto.getMenuPrice(),
+			dto.getMenuNo()
+		};
 		return jdbcTemplate.update(sql, data) > 0;
 	}
-	
 	public boolean delete(int menuNo) {
-		String sql = "delete menu where menu_no=?";
+		String sql = "delete menu where menu_no = ?";
 		Object[] data = {menuNo};
 		return jdbcTemplate.update(sql, data) > 0;
 	}
-	
 	public List<MenuDto> selectList() {
 		String sql = "select * from menu order by menu_no asc";
 		return jdbcTemplate.query(sql, mapper);
 	}
-	
 	public List<MenuDto> selectList(String column, String keyword) {
-		String sql = "select * from menu where instr(upper("+column+", upper(?)) > 0 "//upper로 대문자로 통합해서 구별
-									+ "order by "+column+" asc, menu_no asc";
+		String sql = "select * from menu "
+//						+ "where instr("+column+", ?) > 0 "//대소문자 구별
+						+ "where instr(upper("+column+"), upper(?)) > 0 "//대소문자 무시
+						+ "order by "+column+" asc, menu_no asc";
 		Object[] data = {keyword};
 		return jdbcTemplate.query(sql, mapper, data);
 	}
-	
 	public MenuDto selectOne(int menuNo) {
 		String sql = "select * from menu where menu_no = ?";
 		Object[] data = {menuNo};
@@ -62,7 +69,15 @@ public class MenuDao {
 		return list.isEmpty() ? null : list.get(0);
 	}
 	
-	
+	@Autowired
+	private StatMapper statMapper;
+	//변종메소드 - 메뉴 유형별 메뉴 개수 통계
+	public List<StatVO> statByType() {
+		String sql = "select menu_type 항목, count(*) 개수 "
+				+ "from menu group by menu_type "
+				+ "order by 개수 desc, menu_type asc";
+		return jdbcTemplate.query(sql, statMapper);
+	}
 	
 	
 	

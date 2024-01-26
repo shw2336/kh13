@@ -37,4 +37,5 @@
 <h2><a href="change?menuNo=${dto.menuNo}">정보수정</a></h2>
 <h2><a href="delete?menuNo=${dto.menuNo}">메뉴삭제</a></h2>
 
+<%-- 템플릿 페이지를 불러오는 코드 --%>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
