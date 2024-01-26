@@ -10,7 +10,6 @@ import com.kh.spring10.dto.StudentDto;
 
 @Service
 public class StudentMapper implements RowMapper<StudentDto>{
-
 	@Override
 	public StudentDto mapRow(ResultSet rs, int rowNum) throws SQLException {
 		StudentDto dto = new StudentDto();
@@ -19,8 +18,6 @@ public class StudentMapper implements RowMapper<StudentDto>{
 		dto.setKoreanScore(rs.getInt("korean_score"));
 		dto.setMathScore(rs.getInt("math_score"));
 		dto.setEnglishScore(rs.getInt("english_score"));
-		
 		return dto;
 	}
-
 }

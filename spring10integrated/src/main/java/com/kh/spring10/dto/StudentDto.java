@@ -6,7 +6,6 @@ public class StudentDto {
 	private int koreanScore;
 	private int mathScore;
 	private int englishScore;
-	
 	public StudentDto() {
 		super();
 	}
@@ -46,5 +45,4 @@ public class StudentDto {
 	public float getAverage() {
 		return getTotal() / 3f;
 	}
-	
 }
