@@ -70,6 +70,7 @@ public class MemberController {
 		if(isValid) {
 			//세션에 데이터 추가
 			session.setAttribute("loginId", findDto.getMemberId());
+			session.setAttribute("loginLevel", findDto.getMemberLevel());
 			
 			//최종 로그인시각 갱신
 			memberDao.updateMemberLogin(findDto.getMemberId());
@@ -87,6 +88,8 @@ public class MemberController {
 	@RequestMapping("/logout")
 	public String logout(HttpSession session) {
 		session.removeAttribute("loginId");
+		session.removeAttribute("loginLevel");//세션의 값 삭제
+//		session.invalidate();//세션삭제(비추천)
 		return "redirect:/";
 	}
 	
