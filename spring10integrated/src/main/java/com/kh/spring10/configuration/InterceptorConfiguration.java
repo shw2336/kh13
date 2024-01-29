@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import com.kh.spring10.interceptor.AdminInterceptor;
 import com.kh.spring10.interceptor.MemberInterceptor;
 import com.kh.spring10.interceptor.TestInterceptor;
 
@@ -20,6 +21,9 @@ public class InterceptorConfiguration implements WebMvcConfigurer {
 	@Autowired
 	private MemberInterceptor memberInterceptor;
 	
+	@Autowired
+	private AdminInterceptor adminInterceptor;
+	
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 //		registry에다가 인터셉터를 주소와 함께 등록
@@ -27,26 +31,29 @@ public class InterceptorConfiguration implements WebMvcConfigurer {
 //		registry.addInterceptor(testInterceptor)
 //					.addPathPatterns("/pocketmon/list", "/emp/list");
 		
+//		지정한 페이지만 허용하도록 설정
 //		registry.addInterceptor(memberInterceptor)
-//					.addPathPatterns("/member/mypage");
-		
-		//화이트리스트 방법은 회원이 아닌 외부인을 전체 차단하고 몇몇 페이지만 풀어놓는것
-		//블랙리스트 방법은 내가 차단하겠다고 설정한것들 빼고는 다 풀어놓는것
+//					.addPathPatterns(
+//							"/member/mypage", 
+//							"/member/password", "/member/passwordFinish",
+//							"/member/change",
+//							"/member/exit"
+//					);
 		
 //		중간주소를 등록하고 특정 페이지를 제외(exclude)
-//		-주소를 설정할 때 **와 *를 사용할 수 있다
-//		- 주소에있는 마지막 슬래쉬 / 는 엔드포인트라고 한다
-//		-**는 하위 엔드포인트까지 모두 포함하여 설정할때 사용(후손)
-//		-*는 동일 엔드포인트까지만 포함하여 설정할때 사용(자식)
-//		* 은 와일드 카드 
+//		- 주소를 설정할 때 **와 *를 사용할 수 있다
+//		- **는 하위 엔드포인트까지 모두 포함하여 설정할 때 사용 (후손)
+//		- *는 동일 엔드포인트까지만 포함하여 설정할 때 사용 (자식)
 		registry.addInterceptor(memberInterceptor)
 					.addPathPatterns("/member/**")
 					.excludePathPatterns(
-							//"/member/join", "/member/joinFinish", 
-							"/member/join*", 
+							//"/member/join", "/member/joinFinish",
+							"/member/join*",
 							"/member/login", "/member/exitFinish"
 					);
 		
-		
+		//관리자 인터셉터 등록
+		//registry.addInterceptor(adminInterceptor)
+		//			.addPathPatterns("/admin/**");
 	}
 }
