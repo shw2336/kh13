@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.spring10.dao.BoardDao;
+import com.kh.spring10.dao.MemberDao;
 import com.kh.spring10.dto.BoardDto;
+import com.kh.spring10.dto.MemberDto;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -22,7 +24,8 @@ public class BoardController {
 	
 	@Autowired
 	private BoardDao boardDao;
-	
+	@Autowired
+	private MemberDao memberDao;
 	
 	//게시판 등록
 	@GetMapping("/insert")
@@ -32,8 +35,10 @@ public class BoardController {
 	
 	@PostMapping("/insert")
 	public String insert(@ModelAttribute BoardDto boardDto, 
-			HttpSession session) {
+			HttpSession session, Model model) {
 		String loginId = (String)session.getAttribute("loginId");
+		MemberDto memberDto = memberDao.selectOne(loginId);//아이디 맞는 정보 조회
+		model.addAttribute("memberDto", memberDto);
 		boardDao.insert(boardDto);
 		return "redirect:list";
 	}
