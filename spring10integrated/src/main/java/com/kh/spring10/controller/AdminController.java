@@ -5,6 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -83,5 +86,35 @@ public class AdminController {
 		}
 		return "/WEB-INF/views/admin/member/search.jsp";
 	}
+	
+	@RequestMapping("/member/detail")
+	public String memberDetail(@RequestParam String memberId, Model model) {
+		MemberDto memberDto = memberDao.selectOne(memberId);
+		model.addAttribute("memberDto", memberDto);
+		return "/WEB-INF/views/admin/member/detail.jsp";
+	}
+	
+	@GetMapping("/member/delete")
+	public String memberDelete(@RequestParam String memberId) {
+		memberDao.delete(memberId);
+		//return "redirect:/admin/member/search";
+		return "redirect:search";
+	}
+	
+	@GetMapping("/member/edit")
+	public String edit(@RequestParam String memberId, Model model) {
+		MemberDto memberDto = memberDao.selectOne(memberId);
+		model.addAttribute("memberDto", memberDto);
+		return "/WEB-INF/views/admin/member/edit.jsp";
+	}
+	
+	@PostMapping("/member/edit")
+	public String memberEdit(@ModelAttribute MemberDto memberDto) {
+		memberDao.updateMemberByAdmin(memberDto);
+//		return "redirect:/admin/member/detail?memberId="+memberDto.getMemberId();
+		return "redirect:detail?memberId="+memberDto.getMemberId();
+	}
+	
+	
 	
 }
