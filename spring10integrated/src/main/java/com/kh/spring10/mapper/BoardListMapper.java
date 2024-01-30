@@ -9,13 +9,13 @@ import org.springframework.stereotype.Service;
 import com.kh.spring10.dto.BoardDto;
 
 @Service
-public class BoardMapper implements RowMapper<BoardDto>{
+public class BoardListMapper implements RowMapper<BoardDto>{
 	@Override
 	public BoardDto mapRow(ResultSet rs, int rowNum) throws SQLException {
 		BoardDto boardDto = new BoardDto();
 		boardDto.setBoardNo(rs.getInt("board_no"));
 		boardDto.setBoardTitle(rs.getString("board_title"));
-		boardDto.setBoardContent(rs.getString("board_content"));
+		//boardDto.setBoardContent(rs.getString("board_content"));
 		boardDto.setBoardWriter(rs.getString("board_writer"));
 		boardDto.setBoardWtime(rs.getDate("board_wtime"));
 		boardDto.setBoardEtime(rs.getDate("board_etime"));
