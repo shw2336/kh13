@@ -11,6 +11,8 @@
 	타인에 대한 무분별한 비방 또는 욕설은 경고 없이 삭제될 수 있습니다
 </p>
 
+<h2><a href="write">글쓰기</a></h2>
+
 <%-- 테이블 --%>
 <table border="1" width="800">
 	<thead>
@@ -64,3 +66,8 @@
 
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
+
+
+
+
+

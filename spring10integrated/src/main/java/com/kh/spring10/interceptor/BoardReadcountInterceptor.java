@@ -57,6 +57,7 @@ public class BoardReadcountInterceptor implements HandlerInterceptor {
 		
 		//session에 history라는 이름의 저장소를 꺼낸다(없을 수도 있음)
 		Set<Integer> history = (Set<Integer>) session.getAttribute("history");
+		//System.out.println("before = " + history); 
 		
 		//history가 없으면 null이므로 새로 만들어야 한다
 		if(history == null) {
@@ -70,6 +71,7 @@ public class BoardReadcountInterceptor implements HandlerInterceptor {
 			history.add(boardNo);//번호를 기록하고
 			session.setAttribute("history", history);//저장소를 갱신시켜라
 		}
+		//System.out.println("after = " + history); 
 		
 		//조회수 증가
 		boardDao.updateBoardReadcount(boardNo);
@@ -77,3 +79,5 @@ public class BoardReadcountInterceptor implements HandlerInterceptor {
 		return true;//통과 
 	}
 }
+
+
