@@ -35,9 +35,9 @@
 			<td align="left">
 				<%-- 제목 앞에 차수만큼 띄어쓰기 처리 --%>
 				<c:forEach var="i" begin="1" end="${boardDto.boardDepth}" step="1">
-					&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;
 				</c:forEach>
-
+				
 				<%-- 답글일 경우만 이미지를 출력 --%>
 				<c:if test="${boardDto.boardDepth > 0}">
 					→
@@ -67,7 +67,7 @@
 		</tr>
 		</c:forEach>
 	</tbody>
-</table>
+</table> 
 
 <%-- 네비게이터 --%>
 <h2>
