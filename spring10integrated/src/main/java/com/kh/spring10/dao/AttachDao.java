@@ -38,4 +38,11 @@ public class AttachDao {
 		return list.isEmpty() ? null : list.get(0);
 	}
 	
+	public boolean delete(int attachNo) {
+		String sql = "select * from attach where attach_no = ?";
+		Object[] data = {attachNo};
+		return jdbcTemplate.update(sql, data) > 0;
+	}
+
+	
 }

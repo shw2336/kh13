@@ -1,5 +1,7 @@
 package com.kh.spring10.controller;
 
+import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,9 +10,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.kh.spring10.dao.AttachDao;
 import com.kh.spring10.dao.MemberDao;
 import com.kh.spring10.dto.MemberDto;
+import com.kh.spring10.service.AttachService;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -21,14 +26,26 @@ public class MemberController {
 	@Autowired
 	private MemberDao memberDao;
 	
+	@Autowired
+	private AttachDao attachDao;
+	
+	@Autowired
+	private AttachService attachService;
+	
 	//회원가입
 	@GetMapping("/join")
 	public String join() {
 		return "/WEB-INF/views/member/join.jsp";
 	}
 	@PostMapping("/join")
-	public String join(@ModelAttribute MemberDto memberDto) {
+	public String join(@ModelAttribute MemberDto memberDto,
+								@RequestParam MultipartFile attach) throws IllegalStateException, IOException {
 		memberDao.insert(memberDto);
+		
+		if(!attach.isEmpty()) {
+			int attachNo = attachService.save(attach);//파일저장+DB저장
+			memberDao.connect(memberDto.getMemberId(), attachNo);//연결
+		}
 		return "redirect:joinFinish";
 	}
 	@RequestMapping("/joinFinish")
@@ -36,14 +53,15 @@ public class MemberController {
 		return "/WEB-INF/views/member/joinFinish.jsp";
 	}
 	
+	
 	//테스트 로그인 & 로그아웃
 	//- HttpSession을 사용하고 싶다면 매개변수에 선언만 하면 된다
 	//- 등록 : session.setAttribute("key", value)
 	//- 확인 : session.getAttribute("key")
 	//- 삭제 : session.removeAttribute("key")
-	
 	@RequestMapping("/testLogin")
 	public String testLogin(HttpSession session) {
+		//아이디만 있으면 모든 정보를 불러올 수 있으므로 아이디를 저장
 		session.setAttribute("loginId", "testuser1");
 		return "redirect:/";
 	}
@@ -53,19 +71,21 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
-	//실제로그인
-	//- 아이디와 비밀번호가 검사를 통과해야만 세션에 데이터를 추가한다
+	//실제 로그인
+	//- 아이디와 비밀번호 검사를 통과해야만 세션에 데이터를 추가한다
 	//- 사용자가 입력한 아이디를 추가한다
 	@GetMapping("/login")
 	public String login() {
 		return "/WEB-INF/views/member/login.jsp";
 	}
 	@PostMapping("/login")
-	public String login(@ModelAttribute MemberDto inputDto, HttpSession session) {
+	public String login(@ModelAttribute MemberDto inputDto, 
+																HttpSession session) {
 		//사용자가 입력한 아이디로 회원정보를 조회한다
 		MemberDto findDto = memberDao.selectOne(inputDto.getMemberId());
 		//로그인 가능 여부를 판정
-		boolean isValid = findDto != null && inputDto.getMemberPw().equals(findDto.getMemberPw());
+		boolean isValid = findDto != null 
+				&& inputDto.getMemberPw().equals(findDto.getMemberPw());
 		//결과에 따라 다른 처리
 		if(isValid) {
 			//세션에 데이터 추가
@@ -87,21 +107,20 @@ public class MemberController {
 	//- 로그인 때 저장한 세션의 데이터만 삭제 처리
 	@RequestMapping("/logout")
 	public String logout(HttpSession session) {
-		session.removeAttribute("loginId");
+		session.removeAttribute("loginId");//세션의 값 삭제
 		session.removeAttribute("loginLevel");//세션의 값 삭제
-//		session.invalidate();//세션삭제(비추천)
+//		session.invalidate();//세션 삭제(비추천)
 		return "redirect:/";
 	}
 	
-	//- 확인 : session.getAttribute("key")
 	//마이페이지
-	//- (중요) 내 아이디는 HttpSession 에 있다
+	//- (중요) 내 아이디는 HttpSession에 있다
 	//- 그리고 화면에 정보를 표시해야 한다
 	@RequestMapping("/mypage")
 	public String mypage(HttpSession session, Model model) {
 		//1. 세션에 저장된 아이디를 꺼낸다
 		String loginId = (String) session.getAttribute("loginId");
-		
+
 		//2. 아이디에 맞는 정보를 조회한다
 		MemberDto memberDto = memberDao.selectOne(loginId);
 		
@@ -117,7 +136,9 @@ public class MemberController {
 	public String password() {
 		return "/WEB-INF/views/member/password.jsp";
 	}
+	
 	//기존 비밀번호를 originPw, 변경할 비밀번호를 changePw로 처리
+	//아이디는 HttpSession에 존재한다
 	@PostMapping("/password")
 	public String password(@RequestParam String originPw,
 										@RequestParam String changePw,
@@ -125,8 +146,7 @@ public class MemberController {
 		//로그인된 사용자의 아이디를 추출
 		String loginId = (String) session.getAttribute("loginId");
 		
-		//비밀번호 검사를 위해 기존 정보를 불러온다
-		//(로그인이 이미 된 상황이기 때문에 isValid에서 findDto != null && 는 지워도 된다 )
+		//비밀번호 검사를 위해 DB에 저장된 정보를 불러온다
 		MemberDto findDto = memberDao.selectOne(loginId);
 		boolean isValid = findDto.getMemberPw().equals(originPw);
 		
@@ -142,8 +162,9 @@ public class MemberController {
 		else {//입력한 기존 비밀번호가 유효하지 않을 경우
 			return "redirect:password?error";
 		}
+		
 	}
-			
+	
 	@RequestMapping("/passwordFinish")
 	public String passwordFinish() {
 		return "/WEB-INF/views/member/passwordFinish.jsp";
@@ -204,6 +225,15 @@ public class MemberController {
 		boolean isValid = findDto.getMemberPw().equals(memberPw);
 		
 		if(isValid) {
+			//탈퇴 전에 프로필번호를 찾아서 삭제 처리
+			try {
+				int attachNo = memberDao.findAttachNo(loginId);
+				attachService.remove(attachNo);//파일삭제+DB삭제
+			}
+			catch(Exception e) {
+				e.printStackTrace();
+			}
+			
 			memberDao.delete(loginId);//회원탈퇴
 			session.removeAttribute("loginId");//로그아웃
 			return "redirect:exitFinish";
@@ -218,8 +248,26 @@ public class MemberController {
 		return "/WEB-INF/views/member/exitFinish.jsp";
 	}
 	
-	
-	
-	
-	
+	//프로필 다운로드 페이지
+	@RequestMapping("/image")
+	public String image(HttpSession session) {
+		try {
+			String loginId = (String)session.getAttribute("loginId");
+			int attachNo = memberDao.findAttachNo(loginId);
+			return "redirect:/download?attachNo="+attachNo;
+		}
+		catch(Exception e) {
+			return "redirect:/image/user.png";
+		}
+	}
 }
+
+
+
+
+
+
+
+
+
+

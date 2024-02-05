@@ -2,10 +2,14 @@ package com.kh.spring10.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
+import org.springframework.http.ContentDisposition;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -54,12 +58,16 @@ public class FileDownloadController {
 		//- 추가적인 정보는 header에 설정
 		//return ResponseEntity.status(200).body(내용);
 		return ResponseEntity.ok()
-				.header("Content-Encoding", "UTF-8")
-				.header("Content-Type", attachDto.getAttachType())
-				.header("Content-Length", String.valueOf(attachDto.getAttachSize()))
-				.header("Content-Disposition", "attachment; filename="+attachDto.getAttachName())
-				.body(resource);
-	}
+                .header(HttpHeaders.CONTENT_ENCODING, StandardCharsets.UTF_8.name())
+//                .header(HttpHeaders.CONTENT_TYPE, attachDto.getAttachType()) //내가 유형을 지정해줄 때
+                .contentType(MediaType.APPLICATION_OCTET_STREAM)
+                .contentLength(attachDto.getAttachSize())
+                .header(HttpHeaders.CONTENT_DISPOSITION, 
+                        ContentDisposition.attachment()
+                                                    .filename(attachDto.getAttachName(), StandardCharsets.UTF_8)
+                                                    .build().toString())
+                .body(resource);
+    }
 	
 }
 

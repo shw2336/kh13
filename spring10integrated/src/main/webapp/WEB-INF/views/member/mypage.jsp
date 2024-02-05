@@ -6,6 +6,8 @@
 
 <h1>${memberDto.memberId}님의 정보</h1>
 
+<img src="image" width="200" height="200"><br>
+
 <table border="1" width="450">
 	<tr>
 		<th width="30%">닉네임</th>
@@ -55,8 +57,11 @@
 	</tr>
 </table>
 
+<!-- <h2><a href="/member/password">비밀번호 변경</a></h2> -->
 <h2><a href="/member/password">비밀번호 변경</a></h2>
 <h2><a href="/member/change">개인정보 변경</a></h2>
 <h2><a href="/member/exit">회원 탈퇴</a></h2>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
+
+
