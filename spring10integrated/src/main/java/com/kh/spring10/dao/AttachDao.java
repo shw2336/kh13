@@ -30,19 +30,22 @@ public class AttachDao {
 		};
 		jdbcTemplate.update(sql, data);
 	}
-	
+
 	public AttachDto selectOne(int attachNo) {
 		String sql = "select * from attach where attach_no = ?";
 		Object[] data = {attachNo};
 		List<AttachDto> list = jdbcTemplate.query(sql, attachMapper, data);
 		return list.isEmpty() ? null : list.get(0);
 	}
-	
 	public boolean delete(int attachNo) {
-		String sql = "select * from attach where attach_no = ?";
+		String sql = "delete attach where attach_no = ?";
 		Object[] data = {attachNo};
 		return jdbcTemplate.update(sql, data) > 0;
 	}
 
-	
 }
+
+
+
+
+

@@ -36,25 +36,14 @@ public class AttachService {
 	
 	//파일삭제 + DB삭제
 	public void remove(int attachNo) {
-		//실제파일 삭제
+		//실제파일삭제
 		File dir = new File(System.getProperty("user.home"), "upload");
 		File target = new File(dir, String.valueOf(attachNo));
 		target.delete();
-		attachDao.delete(attachNo);//파일정보 지우고
+		attachDao.delete(attachNo);//파일정보지우고
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }
+
+
+
+
