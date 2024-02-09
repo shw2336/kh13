@@ -113,8 +113,10 @@ public class BoardController {
 	}
 	
 	@GetMapping("/write")
-	public String write(@RequestParam(required = false) Integer boardTarget, Model model) {		
-		//답글일 경우는 작성 페이지로 답글의 정보를 전달(제목 등에 사용)
+	public String write(
+			@RequestParam(required = false) Integer boardTarget,
+			Model model) {
+//		답글일 경우는 작성 페이지로 답글의 정보를 전달(제목 등에 사용)
 		if(boardTarget != null) {
 			BoardDto targetDto = boardDao.selectOne(boardTarget);
 			model.addAttribute("targetDto", targetDto);
