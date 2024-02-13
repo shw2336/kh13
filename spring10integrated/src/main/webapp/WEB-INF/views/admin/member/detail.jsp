@@ -81,7 +81,7 @@
 					<th>구매일시</th>
 				</tr>
 			</thead>
-			<tbody>
+			<tbody> 
 				<c:forEach var="buyDto" items="${buyList}">
 				<tr>
 					<td>${buyDto.buySerial}</td>
