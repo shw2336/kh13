@@ -469,3 +469,32 @@ textarea.tool.tool-fixed {
         .image-lift {
             box-shadow: 0 0 30px 1px #2d3436;
         }
+
+                /*
+            relative를 이용한 디자인
+        */
+        .effect-lift {
+            position: relative;
+            z-index: 99;
+            transition: bottom 0.1s ease-out;
+            bottom: 0px;
+        }
+        .effect-lift:hover {
+            bottom: 5px;
+        }
+        .effect-shake {
+            position: relative;
+            z-index: 99;
+        }
+        /* 움직임에 대한 상세한 시나리오 작성 */
+        @keyframes shake {
+            0% { left: 0px; }
+            20% { left: -1px; }
+            50% { left: 0px; }
+            80% { left: 1px; }
+            100% { left: 0px; }
+        }
+        .effect-shake:hover {
+            /* animation : 딜레이 타이밍 실행시간 반복횟수 [기타옵션] */
+            animation: shake linear 0.25s infinite;
+        }
