@@ -39,7 +39,7 @@
 		<td>${memberDto.memberLevel}</td>
 	</tr>
 	<tr>
-		<th>포인트</th>
+		<th>포인트!</th>
 		<td>${memberDto.memberPoint} point</td>
 	</tr>
 	<tr>
