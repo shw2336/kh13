@@ -6,9 +6,9 @@ html, body {
 }
 main {
     width: 1100px;
-    margin: 0 auto;
+    margin:0 auto;
 }
-header {
+header  {
     padding: 10px;
 }
 section {
@@ -26,15 +26,3 @@ article {
 footer {
     padding: 10px;
 }
-</style>
-</head>
-<body>
-<main>
-<header><h1>KH정보교육원</h1></header>
-<nav>메뉴</nav>
-<section>
-    <aside>사이드바</aside>
-    <article>컨텐츠</article>
-</section>
-<footer>푸터</footer>
-</main>
