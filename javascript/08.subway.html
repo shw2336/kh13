@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript</title>
+
+    <!-- 구글 폰트 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+
+    <!-- 내가 구현한 스타일 -->
+    <link rel="stylesheet" type="text/css" href="../css/commons.css">
+    <link rel="stylesheet" type="text/css" href="../css/test.css">
+
+    <!-- font awesome 아이콘 CDN -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+
+    <style>
+       .bordered {
+            border: 4px solid greenyellow; /* 테두리 두께와 색상을 지정합니다. */
+            width: 150px;
+            height: 3em;
+            background-color: white;
+            color: green;
+        }
+    </style>
+    
+    <!-- javascript를 의도적을 head 자리에 배치해서 가장 먼저 실행되도록 구현 -->
+    <script type="text/javascript">
+        //입력창에 작성된 내용을 p 태그로 복사
+        //- 입력창(input, select, textarea)의 내용은 value 속성이다
+        //- p태그의 내용은 textContent 속성이다
+        function saveContent() {
+            var inputTarget = document.querySelector("[name=test1]");
+            var copyTarget = document.querySelector(".copy");
+
+            var birthYear = parseInt(inputTarget.value); // 입력된 생년도를 가져옵니다.
+            var currentYear = new Date().getFullYear(); // 현재 연도를 가져옵니다.
+            var age = currentYear - birthYear + 1; // 현재 연도와 생년도의 차이를 계산하여 나이를 얻습니다.
+		
+		//계산
+		var price;
+		if(age >= 65 || age < 8) {//어르신 또는 영유아
+			price = 0;
+		}
+		else if(age >= 20) {
+			price = 1400;
+		}
+		else if(age >= 14) {
+			price = 800;
+		}
+		else {
+			price = 500;
+		}
+
+            inputTarget.value = age + "세"; // 입력된 값을 나이로 변경
+            copyTarget.textContent = price + "원"; // 계산된 요금을 표시
+        }
+    </script>
+</head>
+<body>
+    
+    <div class="container w-500">
+        <div class="cell center">
+            <h1>지하철 요금 계산</h1>
+        </div>
+        <div class="cell">
+            <input name="test1" placeholder="출생년도입력!" class="tool w-100">
+            <!-- <textarea name="test1" class="tool w-100"></textarea> -->
+        </div>
+        <div class="cell">
+            <button class="bordered" onclick="saveContent();">
+                요금 계산하기
+            </button>
+        </div>
+
+        <div class="cell">
+            지불하실 금액은 <span class="copy"></span>입니다
+        </div>
+
+    </div>
+
+</body>
+</html>
