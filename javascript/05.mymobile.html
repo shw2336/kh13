@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript 예제</title>
+
+    <!-- 구글 폰트 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+
+    <!-- 내가 구현한 스타일 -->
+    <link rel="stylesheet" type="text/css" href="../css/commons.css">
+    <link rel="stylesheet" type="text/css" href="../css/test.css">
+
+    <!-- font awesome 아이콘 CDN -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+                .bordered {
+            border: 2px solid red; /* 테두리 두께와 색상을 지정합니다. */
+            width: 150px;
+            height: 1.5em;
+            margin: auto;
+        }
+
+        .goodgood {
+            margin: auto;
+            border: 4px solid black; /* 테두리 두께와 색상을 지정합니다. */
+            padding: 5px; /* 내부 여백을 추가하여 텍스트와 테두리 간의 간격을 조정합니다. */
+            width: 200px;
+            border-radius: 1em;
+        }
+        .btn {
+            border-radius: 50%;
+        }
+    </style>
+
+    <!-- javascript를 의도적으로 head 자리에 배치해서 가장 먼저 실행되도록 구현-->
+    <script type="text/javascript">
+        //(중요) 
+        //- 자바스크립트에서 태그를 "선택"해야 제어가 가능하다
+        //- 선택의 개념은 CSS와 동일하다
+        //- 단, 자바스크립트에서는 `document.querySelector("선택자")`로 선택
+
+        var result = ""; // 결과를 저장할 변수
+
+        function appendNumber(number) {
+            result += number; // 현재 숫자를 결과에 추가
+            var target = document.querySelector(".result");
+            target.textContent = result; // 결과를 화면에 표시
+        }
+
+        function clearNumbers() {
+            result = ""; // 결과를 초기화
+            var target = document.querySelector(".result");
+            target.textContent = result; // 결과를 화면에 표시
+        }
+
+        // function one() {
+        //     var target = document.querySelector(".result");
+        //     //console.log(target);
+        //     target.textContent = "1";//대상 태그의 내부 글자를 변경
+        // }
+
+        // function two() {
+        //     var target = document.querySelector(".result");
+        //     //console.log(target);
+        //     target.textContent = "2";//대상 태그의 내부 글자를 변경
+        // }
+
+        // function three() {
+        //     var target = document.querySelector(".result");
+        //     //console.log(target);
+        //     target.textContent = "3";//대상 태그의 내부 글자를 변경
+        // }
+
+        // function star() {
+        //     var target = document.querySelector(".result");
+        //     //console.log(target);
+        //     target.textContent = "*";//대상 태그의 내부 글자를 변경
+        // }
+
+    </script>
+</head>
+<body>
+
+    <div class="container w-500">
+        <div class="cell center">
+            <h1>홀앙희 ㅎㅇ</h1>
+        </div>
+        <!-- <div class="cell">
+            <button onclick="one();">1</button>
+        </div>  
+
+        <div class="cell">
+            <button onclick="two();">2</button>
+        </div>  
+        
+        <div class="cell">
+            <button onclick="three();">3</button>
+        </div>  
+
+        <div class="cell">
+            <button onclick="star();">*</button>
+        </div>  
+
+        <div class="cell">
+            결과: <span class="result"></span>
+        </div> -->
+
+        <div class="goodgood">
+
+            <div class="bordered center">
+                <span class="result"></span>
+            </div>
+    
+            <div class="cell center">
+                <button class="btn" onclick="appendNumber('1');">1</button>
+                <button class="btn"onclick="appendNumber('2');">2</button>
+                <button class="btn"onclick="appendNumber('3');">3</button>
+            </div>  
+    
+            <div class="cell center">
+                <button class="btn"onclick="appendNumber('4');">4</button>
+                <button class="btn"onclick="appendNumber('5');">5</button>
+                <button class="btn"onclick="appendNumber('6');">6</button>
+            </div>  
+            
+            <div class="cell center">
+                <button class="btn"onclick="appendNumber('7');">7</button>
+                <button class="btn"onclick="appendNumber('8');">8</button>
+                <button class="btn"onclick="appendNumber('9');">9</button>
+            </div>  
+    
+            <div class="cell center">
+                <button class="btn"onclick="appendNumber('*');">*</button>
+                <button class="btn"onclick="appendNumber('0');">0</button>
+                <button class="btn"onclick="appendNumber('#');">#</button>
+            </div>  
+    
+            <div class="cell center">
+                <button class="btn"onclick="clearNumbers();"><i class="fa-solid fa-phone"></i></button>
+            </div>
+
+        </div>
+
+
+
+
+    </div>
+
+</body>
+</html>
