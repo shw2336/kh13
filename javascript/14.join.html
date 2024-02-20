@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript 예제</title>
+
+    <!-- 구글 폰트 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+
+    <!-- 내가 구현한 스타일 -->
+    <link rel="stylesheet" type="text/css" href="../css/commons.css">
+    <link rel="stylesheet" type="text/css" href="../css/test.css">
+
+    <!-- font awesome 아이콘 CDN -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        
+    </style>
+
+    <!-- javascript를 의도적으로 head 자리에 배치해서 가장 먼저 실행되도록 구현-->
+    <script type="text/javascript">
+        
+        function CheckTextId() {
+            var inputTarget = document.querySelector(".id");
+            var text = inputTarget.value;
+
+            var regex = /^[a-z][a-z0-9]{7,19}$/;
+            
+            var isValid = regex.test(text);
+
+            var regexTarget = document.querySelector(".idResult");
+            if(isValid) {
+                regexTarget.textContent = "멋진 아이디네요!";
+                regexTarget.style.color = "green";
+            }
+            else {
+                regexTarget.textContent = "아이디는 소문자 시작, 숫자 포함 8~20자로 작성하세요";
+                regexTarget.style.color = "red";
+            }
+        }
+
+        function CheckTextPw() {
+
+            var inputTarget = document.querySelector(".pw");
+            var texts = inputTarget.value;
+
+            var regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$])[a-zA-Z0-9!@#$]{8,20}$/;
+            
+            var isValid = regex.test(texts);
+
+            var regexTarget = document.querySelector(".pwResult");
+            if(isValid2) {
+                regexTarget.textsContent = "올바른 형식의 비밀번호입니다";
+                regexTarget.style.color = "green";
+            }
+            else {
+                regexTarget.textsContent = "비밀번호에는 반드시 숫자, 영문 대소문자, 특수문자를 포함하세요";
+                regexTarget.style.color = "red";
+            }
+
+        }
+
+
+    </script>
+</head>
+<body>
+
+    <div class="container w-500">
+        <div class="cell center">
+            <h1>아이디 비밀번호</h1>
+        </div>
+
+        <div class="cell">
+            <h2>아이디</h2>
+        </div>
+        <div class="cell">
+            <input type="text" class="id tool w-100" oninput="CheckTextId();">
+        </div>  
+        <div class="cell idResult"></div>
+
+        <div class="cell">
+            <h2>비밀번호</h2>
+        </div>
+        <div class="cell">
+            <input type="texts" class="temp tool w-100" oninput="CheckTextPw();">
+        </div>  
+        <div class="cell pwResult"></div>
+
+
+
+
+
+        <div class="cell">
+            <h2>비밀번호 확인</h2>
+        </div>
+        <div class="cell">
+            <input type="text" class="temp tool w-100" oninput="checkText();">
+        </div>  
+        <div class="cell result2"></div>
+
+    </div>
+
+</body>
+</html>
