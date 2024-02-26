@@ -38,6 +38,13 @@
     
     <style>
     </style>
+    
+    <!--  jQuery CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+    
+    <!-- 내가 만든 JS -->
+    <script src="/js/commons.js"></script>
+    
 </head>
 <body>
     
@@ -62,8 +69,8 @@
 		                <li><a href="/menu/list">메뉴정보</a></li>
 		                <li><a href="/student/list">학생성적</a></li>
 		            </ul>
-		        </li>d
-		        	
+		        </li>
+		        
 		        <li><a href="/board/list">자유게시판</a></li>
 		        
 		        <%-- 관리자 메뉴는 관리자에게만 출력 --%>

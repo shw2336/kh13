@@ -23,11 +23,11 @@ public class EmpController {
 	
 	//등록
 	//@RequestMapping("/insert1")
-	@GetMapping("/insert")//GET방식 - 일반적인 주소를 이용한 접근ㅇㅇ
+	@GetMapping("/insert")//GET방식 - 일반적인 주소를 이용한 접근
 	public String insert() {
 		return "/WEB-INF/views/emp/insert1.jsp";
 	}
-			
+	
 	//@RequestMapping("/insert2")
 	@PostMapping("/insert")//POST방식 - Form을 이용한 데이터 전송 접근
 	public String insert(@ModelAttribute EmpDto dto) {
@@ -41,28 +41,29 @@ public class EmpController {
 		return "/WEB-INF/views/emp/insert3.jsp";
 	}
 	
-	
-	//- 수정페이지
+	//수정페이지
 	//- 수정페이지는 일반적으로 상세/목록에서 들어온다
 	//- 처음에 정보가 다 표시되어 있어야 한다
-	//- 그러기 위해서는 출력페이지에서 기본키(PK)정도는 전달받아야 한다
+	//- 그러기 위해서는 출력페이지에서 기본키(PK) 정도는 전달받아야 한다
 	//- 무언가를 화면으로 전달하고 싶다면 매개변수에 Model 객체를 선언
 	//- model은 Map<String, Object> 형태
 	@GetMapping("/edit")
 	public String edit(@RequestParam int empNo, Model model) {
 		EmpDto dto = dao.selectOne(empNo);
+		//model.addAttribute("이름", 데이터);
 		model.addAttribute("dto", dto);
 		return "/WEB-INF/views/emp/edit.jsp";
 	}
 	@PostMapping("/edit")
 	public String edit(@ModelAttribute EmpDto dto) {
 		if(dao.update(dto)) {
-			//return "redirect:/emp/editSuccess"; //절대경로
-			return "redirect:editSuccess"; //상대경로
+			//return "redirect:/emp/editSuccess";
+			//return "redirect:editSuccess";//상세 페이지로 대체
+			return "redirect:detail?empNo="+dto.getEmpNo();
 		}
 		else {
-			//return "redirect:/emp/editFail"; //절대경로
-			return "redirect:editFail"; //상대경로
+			//return "redirect:/emp/editFail";
+			return "redirect:editFail";
 		}
 	}
 	
@@ -92,7 +93,7 @@ public class EmpController {
 		else {
 			list = dao.selectList();
 		}
-
+		
 		model.addAttribute("isSearch", isSearch);
 		model.addAttribute("list", list);
 		return "/WEB-INF/views/emp/list2.jsp";
@@ -112,16 +113,18 @@ public class EmpController {
 		return "redirect:list";
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	@PostMapping("/deleteAll")
+	public String deleteAll(@RequestParam List<Integer> empNo) {
+		for(int no : empNo) {
+			dao.delete(no);
+		}
+		return "redirect:list";
+	}
 	
 }
+
+
+
+
+
+
