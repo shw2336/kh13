@@ -104,7 +104,7 @@ public class MemberDao {
 	}
 	
 	//회원 그룹별 통계
-	public List<StatVO> statByType() {
+	public List<StatVO> countByMemberLevel() {
 		String sql = "select member_level 항목, count(*) 개수 from member "
 						+ "group by member_level "
 						+ "order by 개수 desc, 항목 asc";
@@ -157,10 +157,11 @@ public class MemberDao {
 		Object[] data = {point, memberId};
 		return jdbcTemplate.update(sql, data) > 0;
 	}
+
+	public MemberDto selectOneByMemberNick(String memberNick) {
+		String sql = "select * from member where member_nick = ?";
+		Object[] data = {memberNick};
+		List<MemberDto> list = jdbcTemplate.query(sql, mapper, data);
+		return list.isEmpty() ? null : list.get(0);
+	}
 }
-
-
-
-
-
-
