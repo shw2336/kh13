@@ -26,8 +26,7 @@
 <!-- 구글 폰트 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link
-	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap"
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap"
 	rel="stylesheet">
 
 <!-- 내가 구현한 스타일 -->
@@ -43,19 +42,15 @@
 </style>
 
 <!--  jQuery CDN -->
-<script
-	src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
 
 <!-- summernote cdn -->
-<link
-	href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css"
-	rel="stylesheet">
-<script
-	src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 <style>
-.note-editor {
-	border: 1px solid #636e72 !important;
-}
+	.note-editor {
+		border: 1px solid #636e72 !important;
+	}
 </style>
 <script>
 	$(function() {
@@ -95,9 +90,12 @@
 								return;
 
 							for (var i = 0; i < response.length; i++) {
-								var tag = $("<img>").attr("src", "/download?attachNo=" + response[i]);
+								var tag = $("<img>")
+									.attr("src", "/download?attachNo=" + response[i])
+									.attr("data-key", response[i])
+									.addClass("server-img");
 								$(editor).summernote("insertNode", tag[0]);
-							}
+							} 
 						}
 					});
 				}
