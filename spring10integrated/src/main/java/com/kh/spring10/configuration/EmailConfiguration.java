@@ -1,4 +1,4 @@
-package com.kh.spring12.configuration;
+package com.kh.spring10.configuration;
 
 import java.util.Properties;
 
