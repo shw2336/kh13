@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>문의게시판</title>
+    <style>
+        /* 제목 입력칸 스타일링 */
+        .title-input {
+            border-radius: 5px;
+            border: 2px solid #615c5c;
+            padding: 10px;
+            font-size: 1.2rem;
+            width: 100%; /* 최대 너비는 800px로 설정 */
+            max-width: 800px; /* 최대 너비 설정 */
+            margin: 0 auto;
+            box-sizing: border-box; /* 테두리를 포함한 전체 너비를 설정 */
+            transition-property: transform, color;
+            transition-duration: 0.2s; /* 변화 속도 설정 */
+            transition-timing-function: ease-out; /* 변화 방식 설정 */
+        }
+
+        /* 입력칸에 호버했을 때 애니메이션 효과 추가 */
+        .title-input:hover {
+            transform: scale(1.05); /* 확대 효과 */
+            color: #000000; /* 텍스트 색상 변경 */
+        }
+    </style>
+</head>
+<body>
+    <div style="text-align: center; margin-top: 50px; margin-bottom: 20px;">
+        <input type="text" class="title-input" placeholder="제목을 입력하세요">
+    </div>
+</body>
+</html>
