@@ -4,7 +4,7 @@ import java.sql.Date;
 
 import lombok.Data;
 
-@Data//setter+getter+toString ddffddd
+@Data//setter+getter+toString
 public class MemberDto {
 	private String memberId;
 	private String memberPw;
