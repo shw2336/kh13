@@ -8,7 +8,7 @@
 
 
 
-<%-- 결과 --%>
+<%-- 결과s --%>
 <h2>결과 수 : ${list.size()}</h2>
 <c:forEach var="memberDto" items="${list}">
 	${memberDto}
