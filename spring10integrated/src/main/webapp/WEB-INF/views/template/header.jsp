@@ -17,9 +17,9 @@
 		rel="stylesheet">
 	
 	<!-- 내가 구현한 스타일 -->
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/commons.css">
-	<!--     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/test.css"> -->
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/layout.css">
+	<!-- <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/commons.css"> -->
+	<!-- <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/test.css"> -->
+	<!-- <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/layout.css"> -->
 	
 	<!-- font awesome 아이콘 CDN -->
 	<link rel="stylesheet" type="text/css"
@@ -35,9 +35,11 @@
 	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
 	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 	<style>
-		.note-editor {
-			border: 1px solid #636e72 !important;
-		}
+		/*
+			.note-editor {
+				border: 1px solid #636e72 !important;
+			}
+		*/
 	</style>
 	<script>
 		$(function() {
@@ -52,9 +54,9 @@
 					[ 'insert', [ 'picture', 'link', 'hr' ] ], 
 				],
 				//기본높이 설정(단위 : px)
-				height : 200,
-				minHeight : 200,
-				maxHeight : 300,
+				height : 350,
+				minHeight : 300,
+				maxHeight : 400,
 				//안내문구 설정
 				//placeholder: "입력하세요",
 				callbacks : {
@@ -94,7 +96,7 @@
 	</script>
 	
 	<!-- 내가 만든 JS -->
-	<script src="${pageContext.request.contextPath}/js/commons.js"></script>
+<%-- 	<script src="${pageContext.request.contextPath}/js/commons.js"></script> --%>
 		
 
     <!-- bootstrap cdn -->
@@ -123,7 +125,7 @@
                 <nav class="navbar navbar-expand-lg bg-dark fixed-top" data-bs-theme="dark">
                     <div class="container-fluid">
                         <!-- 좌상단 글자 -->
-                        <a class="navbar-brand" href="${pageContext.request.contextPath}">KH정보교육원</a>
+                        <a class="navbar-brand" href="${pageContext.request.contextPath}/"></a>
 
                         <!-- 햄버거 메뉴 버튼 -->
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"

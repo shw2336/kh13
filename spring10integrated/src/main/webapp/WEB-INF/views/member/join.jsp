@@ -58,7 +58,7 @@
 	
 	        if(regex.test(value)) {//아이디 형식 검사를 통과했다면
 	            $.ajax({
-	                url : "/rest/member/checkId",
+	                url : "${pageContext.request.contextPath}/rest/member/checkId",
 	                method : "post",
 	                data: {
 	                    memberId : value
@@ -66,37 +66,37 @@
 	                success : function(response) {
 	                    //console.log(response);
 	                    if(response == "NNNNN") {
-	                        $("[name=memberId]").removeClass("success fail fail2").addClass("fail2");
+	                        $("[name=memberId]").removeClass("is-valid is-invalid").addClass("is-invalid");
 	                        state.memberIdValid = false;
 	                    }
 	                    else if(response == "NNNNY") {
-	                        $("[name=memberId]").removeClass("success fail fail2").addClass("success");
+	                        $("[name=memberId]").removeClass("is-valid is-invalid").addClass("success");
 	                        state.memberIdValid = true;
 	                    }
 	                }
 	            });
 	        }
 	        else {//아이디가 형식검사를 통과하지 못했다면
-	            $("[name=memberId]").removeClass("success fail fail2").addClass("fail");
+	            $("[name=memberId]").removeClass("is-valid is-invalid").addClass("is-invalid");
 	            state.memberIdValid = false;
 	        }
 	    });
 	    $("[name=memberPw]").on("blur", function(){
 	        var regex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$])[A-Za-z0-9!@#$]{6,15}$/;
 	        state.memberPwValid = regex.test($(this).val());
-	        $(this).removeClass("success fail")
-	                    .addClass(state.memberPwValid ? "success" : "fail");
+	        $(this).removeClass("is-valid is-invalid")
+	                    .addClass(state.memberPwValid ? "is-valid" : "is-invalid");
 	    });
 	    $("#pw-reinput").blur(function(){
 	        var memberPw = $("[name=memberPw]").val();
 	        state.memberPwCheckValid = memberPw == $(this).val();
 	        
 	        if(memberPw.length == 0) {
-	            $(this).removeClass("success fail fail2").addClass("fail2");
+	            $(this).removeClass("is-valid is-invalid").addClass("is-invalid");
 	        }
 	        else {
-	            $(this).removeClass("success fail fail2")
-	                        .addClass(state.memberPwCheckValid ? "success" : "fail");
+	            $(this).removeClass("is-valid is-invalid")
+	                        .addClass(state.memberPwCheckValid ? "is-valid" : "is-invalid");
 	        }
 	    });
 	    $("[name=memberNick]").blur(function(){
@@ -105,21 +105,21 @@
 	
 	        if(regex.test(value)) {
 	            $.ajax({
-	                url:"/rest/member/checkMemberNick",
+	                url:"${pageContext.request.contextPath}/rest/member/checkMemberNick",
 	                method:"post",
 	                data : { memberNick : value },
 	                success:function(response){
 	                    if(response) {//사용 가능한 경우 - success
 	                        state.memberNickValid = true;
 	                        $("[name=memberNick]")
-	                            .removeClass("success fail fail2")
+	                            .removeClass("is-valid is-invalid")
 	                            .addClass("success");
 	                    }
 	                    else {//이미 사용중인 경우 - fail2
 	                        state.memberNickValid = false;
 	                        $("[name=memberNick]")
-	                            .removeClass("success fail fail2")
-	                            .addClass("fail2");
+	                            .removeClass("is-valid is-invalid")
+	                            .addClass("is-invalid");
 	                    }
 	                }
 	            });
@@ -127,8 +127,8 @@
 	        else {//형식이 맞지 않는 경우 - fail
 	            state.memberNickValid = false;
 	            $("[name=memberNick]")
-	                .removeClass("success fail fail2")
-	                .addClass("fail");
+	                .removeClass("is-valid is-invalid")
+	                .addClass("is-invalid");
 	        }
 	    });
 	    //인증을 마쳤는데 추가 입력을 하는 경우는 모든 상태를 초기화
@@ -138,13 +138,13 @@
 	    $("[name=memberEmail]").on("input", function(){
 	    	if(state.memberEmailValid) {
 	    		state.memberEmailValid = false;
-	    		$(this).removeClass("success fail");
+	    		$(this).removeClass("is-valid is-invalid");
 	    		$(".cert-wrapper").empty();
 	    	}
 	    });
 	    //이메일 입력을 마친 상황일 때 잘못 입력한 경우만큼은 상태를 갱신
 	    $("[name=memberEmail]").blur(function(){
-	        var regex = /^[a-z0-9]{8,20}@[a-z0-9\.]{1,20}$/;
+	        var regex = /^[a-z0-9]{6,20}@[a-z0-9\.]{1,20}$/;
 	        var value = $(this).val();
 	        
 	        var isValid = regex.test(value);
@@ -153,12 +153,12 @@
 	        	state.memberEmailValid = false;
 	        }
 	        
-	        $(this).removeClass("success fail")
-	                    .addClass(isValid ? "success" : "fail");
+	        $(this).removeClass("is-valid is-invalid")
+	                    .addClass(isValid ? "is-valid" : "is-invalid");
 	        //뒤에 있는 보내기버튼을 활성화 또는 비활성화
 	        $(this).next(".btn-send-cert").prop("disabled", !isValid)
-	        			.removeClass("positive negative")
-	        			.addClass(isValid ? "positive" : "negative");
+	        			.removeClass("btn-success btn-danger")
+	        			.addClass(isValid ? "btn-success" : "btn-danger");
 	    });
 		//인증메일 보내기 이벤트
         var memberEmail;
@@ -174,7 +174,7 @@
             if(email.length == 0) return;
 
             $.ajax({
-                url:"/rest/member/sendCert",
+                url:"${pageContext.request.contextPath}/rest/member/sendCert",
                 method:"post",
                 data:{memberEmail : email},
                 success: function(response){
@@ -205,13 +205,13 @@
             if(memberEmail == undefined || number.length == 0) return;
 
             $.ajax({
-                url:"/rest/member/checkCert",
+                url:"${pageContext.request.contextPath}/rest/member/checkCert",
                 method:"post",
                 data:{ certEmail : memberEmail, certNumber : number },
                 success: function(response){
                     //response는 true 아니면 false이므로 상태를 갱신하도록 처리
-                    $(".cert-input").removeClass("success fail")
-                                .addClass(response === true ? "success" : "fail");
+                    $(".cert-input").removeClass("is-valid is-invalid")
+                                .addClass(response === true ? "is-valid" : "is-invalid");
                     if(response === true) {
                         //$(".btn-check-cert").off("click");
                         //$(".btn-check-cert").remove();
@@ -233,15 +233,15 @@
 	        var regex = /^010[1-9][0-9]{7}$/;
 	        var value = $(this).val();
 	        state.memberContactValid = value.length == 0 || regex.test(value);
-	        $(this).removeClass("success fail")
-	                    .addClass(state.memberContactValid ? "success" : "fail");
+	        $(this).removeClass("is-valid is-invalid")
+	                    .addClass(state.memberContactValid ? "is-valid" : "is-invalid");
 	    });
 	    $("[name=memberBirth]").blur(function(){
 	        var regex = /^(19[0-9]{2}|20[0-9]{2})-(02-(0[1-9]|1[0-9]|2[0-8])|(0[469]|11)-(0[1-9]|1[0-9]|2[0-9]|30)|(0[13578]|1[02])-(0[1-9]|1[0-9]|2[0-9]|3[01]))$/;
 	        var value = $(this).val();
 	        state.memberBirthValid = value.length == 0 || regex.test(value);
-	        $(this).removeClass("success fail")
-	                    .addClass(state.memberBirthValid ? "success" : "fail");
+	        $(this).removeClass("is-valid is-invalid")
+	                    .addClass(state.memberBirthValid ? "is-valid" : "is-invalid");
 	    });
 	
 	    //주소는 세 개의 입력창이 모두 입력되거나 안되거나 둘 중 하나
@@ -256,28 +256,28 @@
 	        state.memberAddressValid = isClear || isFill;
 	
 	        $("[name=memberPost], [name=memberAddress1], [name=memberAddress2]")
-	                .removeClass("success fail")
-	                .addClass(state.memberAddressValid ? "success" : "fail");
+	                .removeClass("is-valid is-invalid")
+	                .addClass(state.memberAddressValid ? "is-valid" : "is-invalid");
 	    });
 	
 	    //form 전송
 	    $(".check-form").submit(function(){
 	        //$(this).find("[name], #pw-reinput").blur();
-	        //$(this).find(".tool").blur();//모든 창
+	        //$(this).find(".form-control").blur();//모든 창
 	        
-	        //입력창 중에서 success fail fail2가 없는 창
-	        $(this).find(".tool").not(".success, .fail, .fail2").blur();
+	        //입력창 중에서 is-valid is-invalid fail2가 없는 창
+	        $(this).find(".form-control, .form-select").not(".is-valid, .is-invalid").blur();
 	        return state.ok();
 	    });
 	});
 </script>
 <script type="text/template" id="cert-template">
         <div>
-            <input type="text" class="tool cert-input" 
+            <input type="text" class="form-control cert-input" 
                                         placeholder="인증번호">
             <button type="button" class="btn btn-check-cert">확인</button>
-            <div class="success-feedback">이메일 인증 완료</div>
-            <div class="fail-feedback">인증번호 불일치</div>
+            <div class="valid-feedback">이메일 인증 완료</div>
+            <div class="invalid-feedback">인증번호 불일치</div>
         </div>
 </script>
 
@@ -339,10 +339,9 @@
             </label>
             <input type="text" name="memberId" 
                             placeholder="영문 소문자시작, 숫자 포함 8~20자" 
-                            class="tool w-100">
-            <div class="success-feedback">멋진 아이디네요!</div>
-            <div class="fail-feedback">아이디는 소문자 시작, 숫자 포함 8~20자로 작성하세요</div>
-            <div class="fail2-feedback">이미 사용중인 아이디입니다</div>
+                            class="form-control w-100">
+            <div class="valid-feedback">멋진 아이디네요!</div>
+            <div class="invalid-feedback">사용할 수 없는 아이디입니다</div>
         </div>
 		<div class="cell">
             <label>
@@ -351,9 +350,9 @@
             </label>
             <input type="password" name="memberPw"
                             placeholder="영문 대소문자, 숫자, 특수문자 1개 이상 포함 6~15자"
-                            class="tool w-100">
-            <div class="success-feedback">비밀번호가 올바른 형식입니다</div>
-            <div class="fail-feedback">비밀번호에는 반드시 영문 대,소문자와 숫자, 특수문자가 포함되어야 합니다</div>
+                            class="form-control w-100">
+            <div class="valid-feedback">비밀번호가 올바른 형식입니다</div>
+            <div class="invalid-feedback">비밀번호에는 반드시 영문 대,소문자와 숫자, 특수문자가 포함되어야 합니다</div>
         </div>
 		<div class="cell">
 			<label>
@@ -362,10 +361,9 @@
 			</label>
 			<!-- 비밀번호 확인은 백엔드로 전송되지 않도록 이름을 부여하지 않는다 -->
 		    <input type="password" placeholder=""
-		                    id="pw-reinput" class="tool w-100">
-		    <div class="success-feedback">비밀번호가 일치합니다</div>
-		    <div class="fail-feedback">비밀번호가 일치하지 않습니다</div>
-		    <div class="fail2-feedback">비밀번호를 먼저 입력하세요</div>
+		                    id="pw-reinput" class="form-control w-100">
+		    <div class="valid-feedback">비밀번호가 일치합니다</div>
+		    <div class="invalid-feedback">비밀번호가 일치하지 않습니다</div>
 		</div>
 		
 		<div class="flex-cell">
@@ -385,21 +383,20 @@
                 <i class="fa-solid fa-asterisk red"></i>
             </label>
             <input type="text" name="memberNick" placeholder="한글,숫자 2~10글자"
-                                class="tool w-100">
-            <div class="success-feedback">사용 가능한 닉네임입니다</div>
-            <div class="fail-feedback">닉네임을 한글,숫자 2~10글자로 작성하세요</div>
-            <div class="fail2-feedback">이미 사용중인 닉네임입니다</div>
+                                class="form-control w-100">
+            <div class="valid-feedback">사용 가능한 닉네임입니다</div>
+            <div class="invalid-feedback">이미 사용중인 닉네임입니다</div>
         </div>
 		
 		<div class="flex-cell">
 			<div class="w-100 left">
-				<button type="button" class="btn btn-prev">
+				<button type="button" class="btn btn-secondary btn-prev">
 					<i class="fa-solid fa-chevron-left"></i>
 					이전
 				</button>
 			</div>
 			<div class="w-100 right">
-				<button type="button" class="btn btn-next">
+				<button type="button" class="btn btn-secondary btn-next">
 					다음
 					<i class="fa-solid fa-chevron-right"></i>
 				</button>
@@ -413,12 +410,12 @@
             
             <div class="flex-cell" style="flex-wrap:wrap;">
 	            <input type="email" name="memberEmail" 
-	                                placeholder="test@kh.com" class="tool width-fill">
+	                                placeholder="test@kh.com" class="form-control width-fill">
 	            <button type="button" class="btn negative btn-send-cert">
 	            	<i class="fa-solid fa-paper-plane"></i>
 	            	<span>보내기</span>
 	            </button>
-	            <div class="fail-feedback w-100">잘못된 이메일 형식입니다</div>
+	            <div class="invalid-feedback w-100">잘못된 이메일 형식입니다</div>
             </div>
         </div>
         
@@ -426,13 +423,13 @@
         
         <div class="flex-cell">
 			<div class="w-100 left">
-				<button type="button" class="btn btn-prev">
+				<button type="button" class="btn btn-secondary btn-prev">
 					<i class="fa-solid fa-chevron-left"></i>
 					이전
 				</button>
 			</div>
 			<div class="w-100 right">
-				<button type="button" class="btn btn-next">
+				<button type="button" class="btn btn-secondary btn-next">
 					다음
 					<i class="fa-solid fa-chevron-right"></i>
 				</button>
@@ -444,14 +441,14 @@
         <div class="cell">
             <label>연락처</label>
             <input type="tel" name="memberContact" 
-                        placeholder="- 제외하고 입력" class="tool w-100">
-            <div class="fail-feedback">잘못된 휴대전화 번호 형식입니다</div>
+                        placeholder="- 제외하고 입력" class="form-control">
+            <div class="invalid-feedback">잘못된 휴대전화 번호 형식입니다</div>
         </div>
 
         <div class="cell">
             <label>생년월일</label>
-            <input type="date" name="memberBirth" class="tool w-100">
-            <div class="fail-feedback">잘못된 날짜 형식입니다</div>
+            <input type="date" name="memberBirth" class="form-control">
+            <div class="invalid-feedback">잘못된 날짜 형식입니다</div>
         </div>
 		
 		<!-- 
@@ -460,13 +457,13 @@
 		-->
 		<div class="flex-cell">
 			<div class="w-100 left">
-				<button type="button" class="btn btn-prev">
+				<button type="button" class="btn btn-secondary btn-prev">
 					<i class="fa-solid fa-chevron-left"></i>
 					이전
 				</button>
 			</div>
 			<div class="w-100 right">
-				<button type="button" class="btn btn-next">
+				<button type="button" class="btn btn-secondary btn-next">
 					다음
 					<i class="fa-solid fa-chevron-right"></i>
 				</button>
@@ -481,22 +478,22 @@
         </div>
         <div class="cell">
             <input type="text" name="memberPost"  readonly
-                    placeholder="우편번호" class="tool" size="6" maxlength="6">
-            <button type="button" class="btn positive btn-address-search">
+                    placeholder="우편번호" class="form-control w-auto" size="6" maxlength="6">
+            <button type="button" class="btn btn-success btn-address-search">
                 <i class="fa-solid fa-magnifying-glass"></i>
             </button>        
-            <button type="button" class="btn negative btn-address-clear">
+            <button type="button" class="btn btn-danger btn-address-clear">
             	<i class="fa-solid fa-xmark"></i>
             </button>
         </div>
         <div class="cell">
             <input type="text" name="memberAddress1" 
-                    placeholder="기본주소" class="tool w-100" readonly>
+                    placeholder="기본주소" class="form-control" readonly>
         </div>
         <div class="cell">
             <input type="text" name="memberAddress2" 
-                    placeholder="상세주소" class="tool w-100">
-            <div class="fail-feedback">주소를 모두 작성하세요</div>
+                    placeholder="상세주소" class="form-control">
+            <div class="invalid-feedback">주소를 모두 작성하세요</div>
         </div>
 		
 		<div class="flex-cell">
@@ -518,7 +515,7 @@
 	<div class="cell page">
 		<div class="cell">
 			<label>프로필 이미지</label>
-			<input type="file" name="attach" class="tool w-100">
+			<input type="file" name="attach" class="form-control w-100">
 		</div>
 		
 		<div class="flex-cell">
