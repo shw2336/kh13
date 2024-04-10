@@ -2,6 +2,7 @@ package com.kh.spring17;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
@@ -19,43 +20,39 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @SpringBootTest
-public class KakaoPayTest01 {
+public class KakaoPayTest03 {
 
 	@Test
 	public void test( ) throws URISyntaxException, JsonProcessingException {
 		//카카오페이 서버에 결제 준비(ready) 요청을 보내보자!
-		//구버전 코드
+		//신버전 코드(카카오페이 개발자센터가 따로 생김)
 		
 		//요청 전송 도구 생성
 		RestTemplate template = new RestTemplate();
 		
 		//주소 생성
-		URI uri = new URI("https://kapi.kakao.com/v1/payment/ready");
+		URI uri = new URI("https://open-api.kakaopay.com/online/v1/payment/approve");
 		
 		//헤더 생성
 		HttpHeaders header = new HttpHeaders();
-		header.add("Authorization", "KakaoAK e1ef2662f8895554929b0db0a52e7891");
-		header.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
+		header.add("Authorization", "SECRET_KEY DEVC7BE3D53E9253528EC745E7FAEB5AFD4B1C18");
+		header.add("Content-Type", "application/json");
 		
 		//바디 생성
-		MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
-		body.add("cid", "TC0ONETIME");
-		body.add("partner_order_id", UUID.randomUUID().toString());
-		body.add("partner_user_id", "testuser1");
-		body.add("item_name", "초코파이 외 1개");
-		body.add("quantity", "1");
-		body.add("total_amount", "4500");
-		body.add("tax_free_amount", "0");
-		body.add("approval_url", "http://localhost:8080/success");
-		body.add("cancel_url", "http://localhost:8080/cancel");
-		body.add("fail_url", "http://localhost:8080/fail");
+		//MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
+		Map<String, String> body = new HashMap<>();
+		body.put("cid", "TC0ONETIME");
+		body.put("tid", "T616957065886da9b814");
+		body.put("pg_token", "298ef7b3cb87a2d2aeca");
+		body.put("partner_order_id", "3131dee5-400c-4605-a90c-f1c592137b49");
+		body.put("partner_user_id", "testuser1");
 		
 		//통신 요청
 		HttpEntity entity = new HttpEntity(body, header);//헤더+바디
 		
 		Map response = template.postForObject(uri, entity, Map.class);
-		//log.debug("response = {}", response);
-		log.debug("주소 = {}", response.get("next_redirect_pc_url"));
+		log.debug("response = {}", response);
+		
 	}
 	
 }
