@@ -21,6 +21,8 @@ import com.kh.spring17.dto.PaymentDto;
 import com.kh.spring17.dto.ProductDto;
 import com.kh.spring17.vo.KakaoPayApproveRequestVO;
 import com.kh.spring17.vo.KakaoPayApproveResponseVO;
+import com.kh.spring17.vo.KakaoPayCancelRequestVO;
+import com.kh.spring17.vo.KakaoPayCancelResponseVO;
 import com.kh.spring17.vo.KakaoPayOrderRequestVO;
 import com.kh.spring17.vo.KakaoPayOrderResponseVO;
 import com.kh.spring17.vo.KakaoPayReadyRequestVO;
@@ -30,15 +32,16 @@ import com.kh.spring17.vo.PurchaseVO;
 
 @Service
 public class KakaoPayService {
-	
 	@Autowired
 	private KakaoPayProperties kakaoPayProperties;
-	
 	@Autowired
 	private RestTemplate template;
-	
 	@Autowired
 	private HttpHeaders header;
+	@Autowired
+	private PaymentDao paymentDao;
+	@Autowired
+	private ProductDao productDao;
 	
 	//준비요청 메소드
 	public KakaoPayReadyResponseVO ready(KakaoPayReadyRequestVO requestVO) throws URISyntaxException {
@@ -89,11 +92,6 @@ public class KakaoPayService {
 		return template.postForObject(uri, entity, KakaoPayApproveResponseVO.class);
 	}
 	
-	@Autowired
-	private PaymentDao paymentDao;
-	@Autowired
-	private ProductDao productDao;
-	
 	//여러 번의 등록 과정이 모두 성공하거나 모두 실패해야 한다
 	//-> 하나의 트랜잭션(transaction)으로 관리되어야 한다
 	@Transactional
@@ -132,6 +130,7 @@ public class KakaoPayService {
 		}
 	}
 
+	//상세조회 메소드
 	public KakaoPayOrderResponseVO order(KakaoPayOrderRequestVO requestVO) throws URISyntaxException {
 		URI uri = new URI("https://open-api.kakaopay.com/online/v1/payment/order");
 		
@@ -143,5 +142,20 @@ public class KakaoPayService {
 		
 		return template.postForObject(
 							uri, entity, KakaoPayOrderResponseVO.class);
+	}
+
+	//취소 메소드
+	public KakaoPayCancelResponseVO cancel(KakaoPayCancelRequestVO requestVO) throws URISyntaxException {
+		URI uri = new URI("https://open-api.kakaopay.com/online/v1/payment/cancel");
+		
+		Map<String, String> body = new HashMap<>();
+		body.put("cid", kakaoPayProperties.getCid());
+		body.put("tid", requestVO.getTid());
+		body.put("cancel_amount", String.valueOf(requestVO.getCancelAmount()));
+		body.put("cancel_tax_free_amount", "0");
+		
+		HttpEntity entity = new HttpEntity(body, header);
+		
+		return template.postForObject(uri, entity, KakaoPayCancelResponseVO.class);
 	}
 }
