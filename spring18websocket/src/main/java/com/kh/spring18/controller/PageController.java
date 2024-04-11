@@ -12,4 +12,13 @@ public class PageController {
 		return "basic";
 	}
 	
+	@RequestMapping("/simple")
+	public String simple() {
+		return "simple";
+	}
+	
+	@RequestMapping("/chatbot")
+	public String chatbot() {
+		return "chatbot";
+	}
 }
