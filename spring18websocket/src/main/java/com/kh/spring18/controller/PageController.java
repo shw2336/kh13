@@ -66,5 +66,9 @@ public class PageController {
 		return "json";
 	}
 	
+	@RequestMapping("/member")
+	public String member() {
+		return "member";
+	}
 	
 }

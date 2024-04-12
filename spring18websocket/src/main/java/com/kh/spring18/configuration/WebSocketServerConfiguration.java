@@ -6,11 +6,13 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.socket.config.annotation.EnableWebSocket;
 import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
 import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
+import org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor;
 
 import com.kh.spring18.websocket.BasicWebSocketServer;
 import com.kh.spring18.websocket.ChatbotWebSocketServer;
 import com.kh.spring18.websocket.GroupWebSocketServer;
 import com.kh.spring18.websocket.JsonWebSocketServer;
+import com.kh.spring18.websocket.MemberWebSocketServer;
 import com.kh.spring18.websocket.SimpleWebSocketServer;
 
 /**
@@ -32,6 +34,8 @@ public class WebSocketServerConfiguration implements WebSocketConfigurer {
 	private GroupWebSocketServer groupWebSocketServer;
 	@Autowired
 	private JsonWebSocketServer jsonWebSocketServer;
+	@Autowired
+	private MemberWebSocketServer memberWebSocketServer;
 	
 	@Override
 	public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
@@ -49,6 +53,13 @@ public class WebSocketServerConfiguration implements WebSocketConfigurer {
 		registry.addHandler(chatbotWebSocketServer, "/ws/chatbot")
 					.addHandler(groupWebSocketServer, "/ws/group")
 					.addHandler(jsonWebSocketServer, "/ws/json")
+					.withSockJS();
+		
+		//만약 로그인 정보와 같은 HttpSession의 데이터가 웹소켓에서 필요할 경우
+		//원칙적으로는 안되지만 인터셉터2를 추가 설정해서 데이터를 복사할 수 있다
+		
+		registry.addHandler(memberWebSocketServer, "/ws/member")
+					.addInterceptors(new HttpSessionHandshakeInterceptor())
 					.withSockJS();
 	}
 	
