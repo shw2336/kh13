@@ -38,4 +38,19 @@ public class ChatbotWebSocketServer extends TextWebSocketHandler {
 		
 		session.sendMessage(message);
 	}
+	
+	@Override
+    protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
+        //사용자가 보내는 메세지를 받아서 처리하는 메소드
+        //- 사용자는 질문번호를 보낸다
+        //- 질문번호를 받아서 상세조회한 뒤 나오는 정보를 전송하면 된다
+        int chatbotNo = Integer.parseInt(message.getPayload());//문자열을 숫자로... Integer.parseInt "1" --> 1 
+        ChatbotDto chatbotDto = chatbotDao.selectOne(chatbotNo);
+        
+        ObjectMapper mapper = new ObjectMapper();
+        String json = mapper.writeValueAsString(chatbotDto);//JSON 변환
+        TextMessage response = new TextMessage(json);//포장
+        
+        session.sendMessage(response);//웹소켓이라는건 정해진 규격이 잇음. 그래서 chatbotDto가 안들어감 JSON변환해서 들어가게 하는느낌
+    }
 }
