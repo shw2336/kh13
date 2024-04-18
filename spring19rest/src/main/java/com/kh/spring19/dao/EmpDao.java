@@ -21,5 +21,22 @@ public class EmpDao {
 		return sqlSession.selectOne("emp.find", empNo);
 	}
 	
+	public int sequence() {
+		return sqlSession.selectOne("emp.sequence");
+	}
+	public void insert(EmpDto empDto) {
+		sqlSession.insert("emp.save", empDto);
+	}
+
+	public boolean editAll(EmpDto empDto) {
+		return sqlSession.update("emp.editAll", empDto) > 0;
+	}
+	public boolean editUnit(EmpDto empDto) {
+		return sqlSession.update("emp.editUnit", empDto) > 0;
+	}
+
+	public boolean delete(int empNo) {
+		return sqlSession.delete("emp.delete", empNo) > 0;
+	}
 	
 }

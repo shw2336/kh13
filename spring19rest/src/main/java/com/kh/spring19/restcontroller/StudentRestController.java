@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.kh.spring19.dao.EmpDao;
-import com.kh.spring19.dto.EmpDto;
+import com.kh.spring19.dao.StudentDao;
+import com.kh.spring19.dto.StudentDto;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -27,18 +27,18 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 //문서용 설정 추가
-@Tag(name = "사원정보 관리도구", description = "emp 테이블 CRUD 처리")
+@Tag(name = "학생정보 관리도구", description = "student 테이블 CRUD 처리")
 
 @CrossOrigin
 @RestController
-@RequestMapping("/emp")
-public class EmpRestController {
+@RequestMapping("/student")
+public class StudentRestController {
 	@Autowired
-	private EmpDao empDao;
+	private StudentDao studentDao;
 	
 	//문서용 설정 추가
 	@Operation(
-		description = "사원 목록 조회",
+		description = "학생 목록 조회",
 		responses = {
 			@ApiResponse(
 				responseCode = "200",
@@ -47,7 +47,7 @@ public class EmpRestController {
 					@Content(
 						mediaType = "application/json",
 						array = @ArraySchema(
-							schema = @Schema(implementation = EmpDto.class)
+							schema = @Schema(implementation = StudentDto.class)
 						)
 					) 
 				}
@@ -66,19 +66,19 @@ public class EmpRestController {
 		}
 	)
 	@GetMapping("/")
-	public List<EmpDto> list() {
-		return empDao.selectList();
+	public List<StudentDto> list() {
+		return studentDao.selectList();
 	}
 	
-//	@GetMapping("/{empNo}")
-//	public EmpDto find(@PathVariable int empNo) {
-//		EmpDto empDto = empDao.selectOne(empNo);
-//		return empDto;
+//	@GetMapping("/{studentId}")
+//	public StudentDto find(@PathVariable int studentId) {
+//		StudentDto studentDto = studentDao.selectOne(studentId);
+//		return studentDto;
 //	}
 	
 //	조회되지 않는 경우(null인 경우)는 404번으로 처리하고 싶다면
 	@Operation(
-		description = "사원 상세 조회",
+		description = "학생 상세 조회",
 		responses = {
 			@ApiResponse(
 				responseCode = "200",
@@ -86,7 +86,7 @@ public class EmpRestController {
 				content = {
 					@Content(
 						mediaType = "application/json",
-						schema = @Schema(implementation = EmpDto.class)
+						schema = @Schema(implementation = StudentDto.class)
 					)
 				}
 			),
@@ -111,30 +111,30 @@ public class EmpRestController {
 		}
 	)
 	
-	@GetMapping("/{empNo}")
-	public ResponseEntity<EmpDto> find(@PathVariable int empNo) {
-		EmpDto empDto = empDao.selectOne(empNo);
-		if(empDto == null) {
+	@GetMapping("/{studentId}")
+	public ResponseEntity<StudentDto> find(@PathVariable int studentId) {
+		StudentDto studentDto = studentDao.selectOne(studentId);
+		if(studentDto == null) {
 			//return ResponseEntity.notFound().build();
 			return ResponseEntity.status(404).build();
 		}
-		//return ResponseEntity.ok(empDto);
-		return ResponseEntity.status(200).body(empDto);
+		//return ResponseEntity.ok(studentDto);
+		return ResponseEntity.status(200).body(studentDto);
 	}
 	
 	@PostMapping("/")
-	public EmpDto save(@RequestBody EmpDto empDto) {
-		int sequence = empDao.sequence();//번호생성
-		empDto.setEmpNo(sequence);//번호설정
-		empDao.insert(empDto);//등록
-		return empDao.selectOne(sequence);//등록된 결과를 조회하여 반환
+	public StudentDto save(@RequestBody StudentDto studentDto) {
+		int sequence = studentDao.sequence();//번호생성
+		studentDto.setStudentId(sequence);//번호설정
+		studentDao.insert(studentDto);//등록
+		return studentDao.selectOne(sequence);//등록된 결과를 조회하여 반환
 	}
 	
-	// 조회되지 않는 사원(존재하지 않는 사원)은 404번으로 반환
+	// 조회되지 않는 학생(존재하지 않는 학생)은 404번으로 반환
 	
 	@PutMapping("/")
-	public ResponseEntity<?> editAll(@RequestBody EmpDto empDto) {
-		boolean result = empDao.editAll(empDto);
+	public ResponseEntity<?> editAll(@RequestBody StudentDto studentDto) {
+		boolean result = studentDao.editAll(studentDto);
 		if(result == false) {
 			//return ResponseEntity.notFound().build();
 			return ResponseEntity.status(404).build();
@@ -143,8 +143,8 @@ public class EmpRestController {
 	}
 	
 	@PatchMapping("/")
-	public ResponseEntity<?> editUnit(@RequestBody EmpDto empDto) {
-		boolean result = empDao.editUnit(empDto);
+	public ResponseEntity<?> editUnit(@RequestBody StudentDto studentDto) {
+		boolean result = studentDao.editUnit(studentDto);
 		if(result == false) {
 			//return ResponseEntity.notFound().build();
 			return ResponseEntity.status(404).build();
@@ -153,9 +153,9 @@ public class EmpRestController {
 	}
 	
 	//@Operation(작업에 대한 설명)
-	@DeleteMapping("/{empNo}")
-	public ResponseEntity<?> delete(@PathVariable int empNo) {
-		boolean result = empDao.delete(empNo);
+	@DeleteMapping("/{studentId}")
+	public ResponseEntity<?> delete(@PathVariable int studentId) {
+		boolean result = studentDao.delete(studentId);
 		if(result == false) {
 			return ResponseEntity.notFound().build();
 		}
