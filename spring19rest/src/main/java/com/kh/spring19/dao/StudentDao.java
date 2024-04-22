@@ -28,11 +28,8 @@ public class StudentDao {
 		sqlSession.insert("student.save", studentDto);
 	}
 
-	public boolean editAll(StudentDto studentDto) {
-		return sqlSession.update("student.editAll", studentDto) > 0;
-	}
-	public boolean editUnit(StudentDto studentDto) {
-		return sqlSession.update("student.editUnit", studentDto) > 0;
+	public boolean edit(StudentDto studentDto) {
+		return sqlSession.update("student.edit", studentDto) > 0;
 	}
 
 	public boolean delete(int studentId) {

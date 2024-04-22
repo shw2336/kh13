@@ -6,10 +6,10 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Tag(name = "학생 정보 객체")
+@Tag(name = "메뉴 정보 객체")
 @Data @Builder @NoArgsConstructor @AllArgsConstructor
-public class StudentDto {
-	private int studentId;
-	private String name;
-	private Integer koreanScore, englishScore, mathScore;
+public class MenuDto {
+	private int menuNo;
+	private String menuNameKor, menuNameEng, menuType;
+	private int menuPrice;
 }

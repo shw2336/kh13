@@ -11,11 +11,12 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RestControllerAdvice(annotations = {RestController.class})
 public class ErrorRestController {
-
+	
 	@ExceptionHandler(Exception.class)
 	public ResponseEntity<String> handler(Exception e) {
 		//e.printStackTrace();//로깅 배우기 전
-		log.error("오류발생", e);//로깅 배운 후
+		log.error("오류 발생", e);//로깅 배운 후
 		return ResponseEntity.status(500).body("server error");
 	}
+	
 }
