@@ -75,7 +75,7 @@ public class StudentRestController {
 			@ApiResponse(responseCode = "200",description = "조회 완료",
 				content = @Content(
 						mediaType = "application/json",
-						array = @ArraySchema(schema = @Schema(implementation = StudentDto.class))
+						array = @ArraySchema(schema = @Schema(implementation = EmpDto.class))
 				)
 			),
 			@ApiResponse(responseCode = "500",description = "서버 오류",
@@ -191,7 +191,7 @@ public class StudentRestController {
 	)
 	
 	@DeleteMapping("/{studentId}")
-	public ResponseEntity<?> delete(@PathVariable int studentId) {
+	public ResponseEntity<String> delete(@PathVariable int studentId) {
 		boolean result = studentDao.delete(studentId);
 		if(result == false) return ResponseEntity.notFound().build();
 		return ResponseEntity.ok().build();
