@@ -9,13 +9,13 @@ import com.kh.spring19.interceptor.MemberInterceptor;
 
 @Configuration
 public class InterceptorConfiguration implements WebMvcConfigurer {
-    
-    @Autowired
-    private MemberInterceptor memberInterceptor;
-    
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(memberInterceptor)
-                .addPathPatterns("/student/**");
-    }
+	
+	@Autowired
+	private MemberInterceptor memberInterceptor;
+	
+	@Override
+	public void addInterceptors(InterceptorRegistry registry) {
+		registry.addInterceptor(memberInterceptor)
+					.addPathPatterns("/student/**");
+	}
 }
